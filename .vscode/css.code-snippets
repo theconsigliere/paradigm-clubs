@@ -1,0 +1,32 @@
+{
+  "Flex Row": {
+    "scope": "css,scss,less,postcss",
+    "prefix": "flex",
+    "body": [
+      "display: flex;",
+      "flex-direction: row;",
+      "align-items: center;",
+      "justify-content: space-between;"
+    ],
+    "description": "Create a horizontal flex container"
+  },
+  "Flex Center": {
+    "scope": "css,scss,less,postcss",
+    "prefix": "flexc",
+    "body": [
+      "display: flex;",
+      "align-items: center;",
+      "justify-content: center;"
+    ],
+    "description": "Create a centered flex container"
+  },
+  "Flex Column": {
+    "scope": "css,scss,less,postcss",
+    "prefix": "flexcol",
+    "body": [
+      "display: flex;",
+      "flex-direction: column;"
+    ],
+    "description": "Create a vertical flex container"
+  }
+}
