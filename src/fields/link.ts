@@ -21,6 +21,10 @@ type LinkType = (options?: {
   overrides?: Partial<GroupField>
 }) => Field
 
+type LinkValidationContext = {
+  siblingData?: Record<string, unknown>
+}
+
 export const link: LinkType = ({ appearances, disableLabel = false, overrides = {} } = {}) => {
   const linkResult: GroupField = {
     name: 'link',
@@ -76,7 +80,13 @@ export const link: LinkType = ({ appearances, disableLabel = false, overrides = 
       },
       label: 'Document to link to',
       relationTo: ['pages', 'posts'],
-      required: true,
+      validate: (value: unknown, { siblingData }: LinkValidationContext) => {
+        if (siblingData?.type === 'reference' && !value) {
+          return 'Document to link to is required when using an internal link.'
+        }
+
+        return true
+      },
     },
     {
       name: 'url',
@@ -85,7 +95,13 @@ export const link: LinkType = ({ appearances, disableLabel = false, overrides = 
         condition: (_, siblingData) => siblingData?.type === 'custom',
       },
       label: 'Custom URL',
-      required: true,
+      validate: (value: unknown, { siblingData }: LinkValidationContext) => {
+        if (siblingData?.type === 'custom' && !value) {
+          return 'Custom URL is required when using a custom URL.'
+        }
+
+        return true
+      },
     },
   ]
 
