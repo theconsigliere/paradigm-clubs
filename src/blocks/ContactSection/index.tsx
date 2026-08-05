@@ -1,0 +1,1 @@
+export { ContactSectionBlock } from './Component'

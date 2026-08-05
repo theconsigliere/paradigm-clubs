@@ -823,87 +823,36 @@
 /* Signup Block */
 /* Faq */
 
-/* Header */
+/* Contact Section */
 
-.pd__header {
-    position: relative;
-    z-index: 20;
+.contactSection {
+    padding-block: 6rem;
 }
 
-.pd__header-inner {
-    width: min(100%, calc(100% - 2rem));
-    margin-inline: auto;
-    max-width: 90rem;
-    padding-block: 2rem;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+.contactSection__inner {
+    display: grid;
+    gap: 2rem;
+}
+
+.contactSection__info {
+    display: grid;
     gap: 1rem;
 }
 
-
-.pd__header-cta {
-    text-decoration: none;
-}
-
-.pd__header-floating-nav {
-    width: min(100%, calc(100% - 2rem));
-    margin-inline: auto;
-    max-width: 90rem;
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-}
-
-.pd__header-floating-nav-closed,
-.pd__header-floating-nav-open {
-    border: 1px solid var(--p-grey);
-    padding: 1rem;
-    display: flex;
-    flex-direction: column;
-    gap: 0.75rem;
-}
-
-.pd__header-floating-nav-closed-logo,
-.pd__header-floating-nav-open-logo {
-    width: min(100%, 9.375rem);
-    height: 34px;
-}
-
-.pd__header-floating-nav-closed-logo-image,
-.pd__header-floating-nav-open-logo-image {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-}
-
-.pd__header-nav-inner {
-    display: flex;
-    flex-direction: column;
-    gap: 0.75rem;
-}
-
-.pd__header-links,
-.pd__header-social-links {
+.contactSection__buttons {
     display: flex;
     flex-wrap: wrap;
     gap: 0.75rem;
 }
 
-.pd__header-nav-link,
-.pd__header-social-link,
-.pd__header-floating-nav-closed-link {
-    text-decoration: none;
-}
-
-@media (min-width: 768px) {
-    .pd__header-inner,
-    .pd__header-floating-nav {
-        width: min(100%, calc(100% - 4rem));
+@media (min-width: 992px) {
+    .contactSection__inner {
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+        align-items: start;
     }
 }
 
-/* Header */
+/* Contact Section */
 
 
 
@@ -1001,3 +950,27 @@
 
 
 /* Faq */
+/* Legal Pages */
+
+.privacyPage,
+.termsPage {
+  padding-block: 4rem;
+}
+
+.privacyPage__inner,
+.termsPage__inner {
+  margin-inline: auto;
+  max-width: 720px;
+}
+
+.privacyPage__title,
+.termsPage__title {
+  margin-bottom: 1.5rem;
+}
+
+.privacyPage__content,
+.termsPage__content {
+  line-height: 1.6;
+}
+
+/* Legal Pages */

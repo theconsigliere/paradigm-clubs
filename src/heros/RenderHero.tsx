@@ -2,16 +2,10 @@ import React from 'react'
 
 import type { Page } from '@/payload-types'
 
-import { HighImpactHero } from '@/heros/HighImpact'
-import { LowImpactHero } from '@/heros/LowImpact'
-import { MediumImpactHero } from '@/heros/MediumImpact'
 import { VideoHero } from '@/heros/VideoHero'
 import { BasicHero } from '@/heros/BasicHero'
 
 const heroes: Record<string, React.FC<any>> = {
-  highImpact: HighImpactHero,
-  lowImpact: LowImpactHero,
-  mediumImpact: MediumImpactHero,
   videoHero: VideoHero,
   basicHero: BasicHero,
 }

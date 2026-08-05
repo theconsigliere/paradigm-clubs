@@ -6,13 +6,19 @@ import { getPayload } from 'payload'
 import { draftMode } from 'next/headers'
 import React from 'react'
 
+import { redirect } from 'next/navigation'
+
 import { RenderBlocks } from '@/blocks/RenderBlocks'
 import { CMSLink } from '@/components/Link'
 import { RenderHero } from '@/heros/RenderHero'
 import { generateMeta } from '@/utilities/generateMeta'
+import { queryLegalPageBySlug } from '@/utilities/queryLegalPageBySlug'
 import { queryPageBySlug } from '@/utilities/queryPageBySlug'
 import PageClient from './page.client'
 import { LivePreviewListener } from '@/components/LivePreviewListener'
+
+export const dynamic = 'force-dynamic'
+export const dynamicParams = true
 
 export async function generateStaticParams() {
   const payload = await getPayload({ config: configPromise })
@@ -55,9 +61,12 @@ export default async function Page({ params: paramsPromise }: Args) {
     slug: decodedSlug,
   })
 
-  console.log('page', page)
-
   if (!page) {
+    // Legal pages are canonical at /legal/<slug>; keep the bare /<slug> form working as an alias.
+    if (await queryLegalPageBySlug({ slug: decodedSlug })) {
+      redirect(`/legal/${decodedSlug}`)
+    }
+
     return <PayloadRedirects url={url} />
   }
 

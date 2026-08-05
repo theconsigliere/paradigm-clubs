@@ -1,6 +1,5 @@
 import React from 'react'
 
-import { CMSLink } from '@/components/Link'
 import { Media } from '@/components/Media'
 import type { Media as MediaType } from '@/payload-types'
 
@@ -13,7 +12,6 @@ type VideoHeroProps = {
   inspoTextLeft?: string | null
   inspoTextRight?: string | null
   mainFocusLogo?: MediaResource
-  button?: React.ComponentProps<typeof CMSLink>
 }
 
 export const VideoHero: React.FC<VideoHeroProps> = ({
@@ -23,7 +21,6 @@ export const VideoHero: React.FC<VideoHeroProps> = ({
   inspoTextLeft,
   inspoTextRight,
   mainFocusLogo,
-  button,
 }) => {
   return (
     <section className="videoHero" data-theme="dark">
@@ -61,8 +58,6 @@ export const VideoHero: React.FC<VideoHeroProps> = ({
           <div className="videoHero__description-group">
             {description && <h6 className="videoHero__description">{description}</h6>}
           </div>
-
-          {button && <CMSLink appearance={button.appearance} {...button} />}
         </div>
 
         {mainFocusLogo && (

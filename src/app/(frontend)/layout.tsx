@@ -4,9 +4,11 @@ import { DM_Serif_Display } from 'next/font/google'
 import { cn } from '@/utilities/ui'
 import { GeistMono } from 'geist/font/mono'
 import { GeistSans } from 'geist/font/sans'
+import Script from 'next/script'
 import React from 'react'
 
 import { AdminBar } from '@/components/AdminBar'
+import { CookieConsentBanner } from '@/components/CookieConsentBanner'
 import { Footer } from '@/Footer/Component'
 import { Header } from '@/Header/Component'
 import { Providers } from '@/providers'
@@ -25,6 +27,7 @@ const dmSerifDisplay = DM_Serif_Display({
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
   const { isEnabled } = await draftMode()
+  const gaMeasurementId = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID
 
   return (
     <html
@@ -36,6 +39,34 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         <InitTheme />
         <link href="/favicon.ico" rel="icon" sizes="32x32" />
         <link href="/favicon.svg" rel="icon" type="image/svg+xml" />
+        {gaMeasurementId && (
+          <>
+            <Script id="ga-consent-default" strategy="beforeInteractive">
+              {`
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){ dataLayer.push(arguments); }
+                window.gtag = window.gtag || gtag;
+                gtag('consent', 'default', {
+                  ad_storage: 'denied',
+                  ad_user_data: 'denied',
+                  ad_personalization: 'denied',
+                  analytics_storage: 'denied',
+                });
+              `}
+            </Script>
+            <Script
+              async
+              src={`https://www.googletagmanager.com/gtag/js?id=${gaMeasurementId}`}
+              strategy="afterInteractive"
+            />
+            <Script id="ga-init" strategy="afterInteractive">
+              {`
+                window.gtag('js', new Date());
+                window.gtag('config', '${gaMeasurementId}');
+              `}
+            </Script>
+          </>
+        )}
       </head>
       <body>
         <Providers>
@@ -48,6 +79,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
           <Header />
           {children}
           <Footer />
+          <CookieConsentBanner />
         </Providers>
       </body>
     </html>

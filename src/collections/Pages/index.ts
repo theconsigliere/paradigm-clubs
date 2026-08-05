@@ -5,6 +5,7 @@ import { authenticatedOrPublished } from '../../access/authenticatedOrPublished'
 import { Archive } from '../../blocks/ArchiveBlock/config'
 import { BreakdownBlock } from '../../blocks/BreakdownBlock/config'
 import { CallToAction } from '../../blocks/CallToAction/config'
+import { ContactSectionBlock } from '../../blocks/ContactSection/config'
 import { Content } from '../../blocks/Content/config'
 import { FAQBlock } from '../../blocks/FAQBlock/config'
 import { FormBlock } from '../../blocks/Form/config'
@@ -81,6 +82,7 @@ export const Pages: CollectionConfig<'pages'> = {
               type: 'blocks',
               blocks: [
                 CallToAction,
+                ContactSectionBlock,
                 Content,
                 MediaBlock,
                 Archive,

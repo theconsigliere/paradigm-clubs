@@ -23,7 +23,7 @@ export async function Header() {
   return (
     <>
       <header className="pd__headered">
-        <div className="pd__header-inner">
+        <div className="pd__header-inner pd__container">
           <Link className="pd__header-brand" href="/">
             <HeaderLogo logo={headerData.logo} />
           </Link>

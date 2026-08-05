@@ -7,9 +7,6 @@ import {
   lexicalEditor,
 } from '@payloadcms/richtext-lexical'
 
-import { link } from '@/fields/link'
-import { linkGroup } from '@/fields/linkGroup'
-
 export const hero: Field = {
   name: 'hero',
   type: 'group',
@@ -17,24 +14,12 @@ export const hero: Field = {
     {
       name: 'type',
       type: 'select',
-      defaultValue: 'lowImpact',
+      defaultValue: 'basicHero',
       label: 'Type',
       options: [
         {
           label: 'None',
           value: 'none',
-        },
-        {
-          label: 'High Impact',
-          value: 'highImpact',
-        },
-        {
-          label: 'Medium Impact',
-          value: 'mediumImpact',
-        },
-        {
-          label: 'Low Impact',
-          value: 'lowImpact',
         },
         {
           label: 'Video Hero',
@@ -45,42 +30,6 @@ export const hero: Field = {
           value: 'basicHero',
         },
       ],
-      required: true,
-    },
-    {
-      name: 'richText',
-      type: 'richText',
-      admin: {
-        condition: (_, { type } = {}) => ['highImpact', 'mediumImpact', 'lowImpact'].includes(type),
-      },
-      editor: lexicalEditor({
-        features: ({ rootFeatures }) => {
-          return [
-            ...rootFeatures,
-            HeadingFeature({ enabledHeadingSizes: ['h1', 'h2', 'h3', 'h4'] }),
-            FixedToolbarFeature(),
-            InlineToolbarFeature(),
-          ]
-        },
-      }),
-      label: false,
-    },
-    linkGroup({
-      overrides: {
-        admin: {
-          condition: (_, { type } = {}) =>
-            ['highImpact', 'mediumImpact', 'lowImpact'].includes(type),
-        },
-        maxRows: 2,
-      },
-    }),
-    {
-      name: 'media',
-      type: 'upload',
-      admin: {
-        condition: (_, { type } = {}) => ['highImpact', 'mediumImpact'].includes(type),
-      },
-      relationTo: 'media',
       required: true,
     },
     {
@@ -140,6 +89,52 @@ export const hero: Field = {
       },
     },
     {
+      name: 'mediaType',
+      type: 'radio',
+      defaultValue: 'image',
+      options: [
+        {
+          label: 'Image',
+          value: 'image',
+        },
+        {
+          label: 'Video',
+          value: 'video',
+        },
+      ],
+      admin: {
+        condition: (_, { type } = {}) => type === 'basicHero',
+      },
+    },
+    {
+      name: 'image',
+      type: 'upload',
+      relationTo: 'media',
+      required: true,
+      admin: {
+        condition: (_, { type, mediaType } = {}) => type === 'basicHero' && mediaType === 'image',
+      },
+      filterOptions: {
+        mimeType: {
+          contains: 'image',
+        },
+      },
+    },
+    {
+      name: 'video',
+      type: 'upload',
+      relationTo: 'media',
+      required: true,
+      admin: {
+        condition: (_, { type, mediaType } = {}) => type === 'basicHero' && mediaType === 'video',
+      },
+      filterOptions: {
+        mimeType: {
+          contains: 'video',
+        },
+      },
+    },
+    {
       name: 'subHeadline',
       type: 'text',
       admin: {
@@ -169,22 +164,6 @@ export const hero: Field = {
       admin: {
         condition: (_, { type } = {}) => type === 'basicHero',
       },
-    },
-    {
-      type: 'collapsible',
-      label: 'Button',
-      admin: {
-        condition: (_, { type } = {}) => type === 'basicHero',
-        initCollapsed: true,
-      },
-      fields: [
-        link({
-          appearances: false,
-          overrides: {
-            name: 'button',
-          },
-        }),
-      ],
     },
   ],
   label: false,
