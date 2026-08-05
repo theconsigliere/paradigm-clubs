@@ -11,6 +11,8 @@ import { queryPageBySlug } from '@/utilities/queryPageBySlug'
 import PageClient from './[slug]/page.client'
 import { LivePreviewListener } from '@/components/LivePreviewListener'
 
+export const revalidate = 0
+
 export const dynamic = 'force-dynamic'
 
 export default async function HomePage() {
