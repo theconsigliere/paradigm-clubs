@@ -1,21 +1,19 @@
 /**
- * Processes media resource URL to ensure proper formatting.
+ * Processes media resource URL to ensure proper formatting
+ * @param url The original URL from the resource
+ * @param cacheTag Optional cache tag to append to the URL
+ * @returns Properly formatted URL with cache tag if provided
  *
- * Payload may already provide a fully qualified storage URL (for example from
- * Vercel storage or another adapter), so we should preserve that URL and only
- * append a cache tag when needed.
+ * Local paths (e.g. `/api/media/file/image.webp`) are kept relative so
+ * Next.js image optimization treats them as local rather than fetching
+ * through `remotePatterns`, which blocks private IPs since Next.js 16.
  */
 export const getMediaUrl = (url: string | null | undefined, cacheTag?: string | null): string => {
   if (!url) return ''
 
-  const trimmedUrl = url.trim()
-  if (!trimmedUrl) return ''
-
-  if (!cacheTag || cacheTag === '') {
-    return trimmedUrl
+  if (cacheTag && cacheTag !== '') {
+    cacheTag = encodeURIComponent(cacheTag)
   }
 
-  const encodedCacheTag = encodeURIComponent(cacheTag)
-
-  return trimmedUrl.includes('?') ? `${trimmedUrl}&${encodedCacheTag}` : `${trimmedUrl}?${encodedCacheTag}`
+  return cacheTag ? `${url}?${cacheTag}` : url
 }
