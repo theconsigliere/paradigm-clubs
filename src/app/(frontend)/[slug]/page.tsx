@@ -14,6 +14,7 @@ import { RenderHero } from '@/heros/RenderHero'
 import { generateMeta } from '@/utilities/generateMeta'
 import { queryLegalPageBySlug } from '@/utilities/queryLegalPageBySlug'
 import { queryPageBySlug } from '@/utilities/queryPageBySlug'
+import { shouldUseHomeFallback } from '@/utilities/shouldUseHomeFallback'
 import PageClient from './page.client'
 import { LivePreviewListener } from '@/components/LivePreviewListener'
 
@@ -65,6 +66,10 @@ export default async function Page({ params: paramsPromise }: Args) {
     // Legal pages are canonical at /legal/<slug>; keep the bare /<slug> form working as an alias.
     if (await queryLegalPageBySlug({ slug: decodedSlug })) {
       redirect(`/legal/${decodedSlug}`)
+    }
+
+    if (shouldUseHomeFallback(decodedSlug)) {
+      return <PageClient />
     }
 
     return <PayloadRedirects url={url} />
