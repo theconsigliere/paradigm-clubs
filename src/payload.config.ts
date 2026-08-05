@@ -21,6 +21,13 @@ const dirname = path.dirname(filename)
 
 // Keep schema push opt-in to prevent local startup failures on shared/legacy databases.
 const shouldPushSchema = process.env.PAYLOAD_DB_PUSH === 'true'
+const payloadSecret = process.env.PAYLOAD_SECRET
+
+if (!payloadSecret) {
+  throw new Error(
+    'Missing PAYLOAD_SECRET. Set a strong PAYLOAD_SECRET in your environment (Vercel: Project Settings -> Environment Variables).',
+  )
+}
 
 export default buildConfig({
   admin: {
@@ -74,7 +81,7 @@ export default buildConfig({
   cors: [getServerSideURL()].filter(Boolean),
   globals: [Header, Footer],
   plugins,
-  secret: process.env.PAYLOAD_SECRET,
+  secret: payloadSecret,
   sharp,
   typescript: {
     outputFile: path.resolve(dirname, 'payload-types.ts'),

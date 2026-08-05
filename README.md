@@ -246,6 +246,14 @@ To run Payload in production, you need to build and start the Admin panel. To do
 
 This template can also be deployed to Vercel for free. You can get started by choosing the Vercel DB adapter during the setup of the template or by manually installing and configuring it:
 
+Required Vercel environment variables:
+
+- `PAYLOAD_SECRET` (required): any long random string used to sign and verify Payload auth tokens.
+- `POSTGRES_URL` (required for this repo): your Vercel Postgres connection string.
+- `NEXT_PUBLIC_SERVER_URL` (recommended): your production site URL, e.g. `https://your-domain.com`.
+- `CRON_SECRET` (optional): required only if you use the jobs endpoint with Vercel cron.
+- `PREVIEW_SECRET` (optional): required only if you use preview endpoints.
+
 ```bash
 pnpm add @payloadcms/db-vercel-postgres
 ```
