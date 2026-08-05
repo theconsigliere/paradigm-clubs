@@ -101,12 +101,9 @@ export default buildConfig({
   plugins: [
     vercelBlobStorage({
       enabled: true,
-      collections: {
-        media: true,
-      },
+      collections: { media: true },
       token: process.env.BLOB_READ_WRITE_TOKEN,
-      clientUploads: true,
-      // addRandomSuffix removed per earlier step
+      clientUploads: false, // avoids the generateFileData race bug
     }),
     ...plugins,
   ],
