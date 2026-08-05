@@ -1,6 +1,5 @@
 import type { Metadata } from 'next'
 
-import { draftMode } from 'next/headers'
 import React from 'react'
 
 import { PayloadRedirects } from '@/components/PayloadRedirects'
@@ -10,13 +9,14 @@ import { generateMeta } from '@/utilities/generateMeta'
 import { queryPageBySlug } from '@/utilities/queryPageBySlug'
 import PageClient from './[slug]/page.client'
 import { LivePreviewListener } from '@/components/LivePreviewListener'
+import { getDraftMode } from '@/utilities/getDraftMode'
 
 export const revalidate = 0
 
 export const dynamic = 'force-dynamic'
 
 export default async function HomePage() {
-  const { isEnabled: draft } = await draftMode()
+  const draft = await getDraftMode()
 
   let page = null
 

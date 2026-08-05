@@ -10,8 +10,6 @@ import { useRouter } from 'next/navigation'
 
 import './index.scss'
 
-import { getClientSideURL } from '@/utilities/getURL'
-
 const baseClass = 'admin-bar'
 
 const collectionLabels = {
@@ -62,7 +60,7 @@ export const AdminBar: React.FC<{
             logo: 'text-white',
             user: 'text-white',
           }}
-          cmsURL={getClientSideURL()}
+          cmsURL={typeof window !== 'undefined' ? window.location.origin : 'http://localhost:3000'}
           collectionSlug={collection}
           collectionLabels={{
             plural: collectionLabels[collection]?.plural || 'Pages',

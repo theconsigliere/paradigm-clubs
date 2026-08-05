@@ -17,7 +17,6 @@ import { draftMode } from 'next/headers'
 import { Analytics } from '@vercel/analytics/next'
 
 import './globals.css'
-import { getServerSideURL } from '@/utilities/getURL'
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
   const { isEnabled } = await draftMode()
@@ -79,7 +78,13 @@ export default async function RootLayout({ children }: { children: React.ReactNo
 }
 
 export const metadata: Metadata = {
-  metadataBase: new URL(getServerSideURL()),
+  metadataBase: new URL(
+    process.env.NEXT_PUBLIC_SERVER_URL ||
+      process.env.VERCEL_URL ||
+      process.env.VERCEL_BRANCH_URL ||
+      process.env.VERCEL_PROJECT_PRODUCTION_URL ||
+      'http://localhost:3000',
+  ),
   openGraph: mergeOpenGraph(),
   twitter: {
     card: 'summary_large_image',

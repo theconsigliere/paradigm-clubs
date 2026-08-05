@@ -1,7 +1,6 @@
 import type { Metadata } from 'next'
 
 import { PayloadRedirects } from '@/components/PayloadRedirects'
-import { draftMode } from 'next/headers'
 import React from 'react'
 
 import { redirect } from 'next/navigation'
@@ -15,6 +14,7 @@ import { queryPageBySlug } from '@/utilities/queryPageBySlug'
 import { shouldUseHomeFallback } from '@/utilities/shouldUseHomeFallback'
 import PageClient from './page.client'
 import { LivePreviewListener } from '@/components/LivePreviewListener'
+import { getDraftMode } from '@/utilities/getDraftMode'
 
 export const dynamic = 'force-dynamic'
 export const dynamicParams = true
@@ -26,7 +26,7 @@ type Args = {
 }
 
 export default async function Page({ params: paramsPromise }: Args) {
-  const { isEnabled: draft } = await draftMode()
+  const draft = await getDraftMode()
   const { slug = 'home' } = await paramsPromise
   // Decode to support slugs with special characters
   const decodedSlug = decodeURIComponent(slug)

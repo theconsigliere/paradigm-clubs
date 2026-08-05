@@ -11,6 +11,9 @@ describe('getURL utilities', () => {
 
   it('normalizes bare hostnames into absolute https URLs', () => {
     expect(normalizeSiteURL('paradigm-clubs.vercel.app')).toBe('https://paradigm-clubs.vercel.app')
+    expect(normalizeSiteURL('paradigm-clubs.vercel.app/')).toBe(
+      'https://paradigm-clubs.vercel.app/',
+    )
     expect(normalizeSiteURL('localhost:3000')).toBe('http://localhost:3000')
   })
 

@@ -11,14 +11,18 @@ import { searchFields } from '@/search/fieldOverrides'
 import { beforeSyncWithSearch } from '@/search/beforeSync'
 
 import { Page, Post } from '@/payload-types'
-import { getServerSideURL } from '@/utilities/getURL'
 
 const generateTitle: GenerateTitle<Post | Page> = ({ doc }) => {
   return doc?.title ? `${doc.title} | PARADIGM` : 'PARADIGM'
 }
 
 const generateURL: GenerateURL<Post | Page> = ({ doc }) => {
-  const url = getServerSideURL()
+  const url =
+    process.env.NEXT_PUBLIC_SERVER_URL ||
+    process.env.VERCEL_URL ||
+    process.env.VERCEL_BRANCH_URL ||
+    process.env.VERCEL_PROJECT_PRODUCTION_URL ||
+    'http://localhost:3000'
 
   return doc?.slug ? `${url}/${doc.slug}` : url
 }

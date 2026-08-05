@@ -13,8 +13,8 @@ import { Footer } from './Footer/config'
 import { Header } from './Header/config'
 import { plugins } from './plugins'
 import { defaultLexical } from '@/fields/defaultLexical'
-import { getServerSideURL } from './utilities/getURL'
 import { LegalPages } from '@/collections/LegalPages'
+import { getDatabaseConnectionString } from '@/utilities/getDatabaseConnectionString'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -22,14 +22,7 @@ const dirname = path.dirname(filename)
 // Keep schema push opt-in to prevent local startup failures on shared/legacy databases.
 const shouldPushSchema = process.env.PAYLOAD_DB_PUSH === 'true'
 const payloadSecret = process.env.PAYLOAD_SECRET
-const dbConnectionString =
-  process.env.PARADIGM_POSTGRES_URL ||
-  process.env.PARADIGM_POSTGRES_URL_NON_POOLING ||
-  process.env.POSTGRES_URL ||
-  process.env.POSTGRES_PRISMA_URL ||
-  process.env.POSTGRES_URL_NON_POOLING ||
-  process.env.DATABASE_URL ||
-  process.env.DATABASE_URL_UNPOOLED
+const dbConnectionString = getDatabaseConnectionString()
 
 if (!payloadSecret) {
   throw new Error(
@@ -92,7 +85,13 @@ export default buildConfig({
     push: shouldPushSchema,
   }),
   collections: [Pages, Posts, Media, Categories, Users, LegalPages],
-  cors: [getServerSideURL()].filter(Boolean),
+  cors: [
+    process.env.NEXT_PUBLIC_SERVER_URL ||
+      process.env.VERCEL_URL ||
+      process.env.VERCEL_BRANCH_URL ||
+      process.env.VERCEL_PROJECT_PRODUCTION_URL ||
+      'http://localhost:3000',
+  ].filter(Boolean),
   globals: [Header, Footer],
   plugins,
   secret: payloadSecret,

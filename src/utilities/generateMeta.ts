@@ -3,10 +3,14 @@ import type { Metadata } from 'next'
 import type { Media, Page, Post, Config } from '../payload-types'
 
 import { mergeOpenGraph } from './mergeOpenGraph'
-import { getServerSideURL, normalizeSiteURL } from './getURL'
 
 const getImageURL = (image?: Media | Config['db']['defaultIDType'] | null) => {
-  const serverUrl = normalizeSiteURL(getServerSideURL())
+  const serverUrl =
+    process.env.NEXT_PUBLIC_SERVER_URL ||
+    process.env.VERCEL_URL ||
+    process.env.VERCEL_BRANCH_URL ||
+    process.env.VERCEL_PROJECT_PRODUCTION_URL ||
+    'http://localhost:3000'
 
   let url = serverUrl + '/P-META.webp'
 

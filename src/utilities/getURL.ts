@@ -22,6 +22,10 @@ export const normalizeSiteURL = (value?: string) => {
     return `https://${trimmed}`
   }
 
+  if (/^[^/\s]+\/$/i.test(trimmed)) {
+    return `https://${trimmed.replace(/\/$/, '/')}`
+  }
+
   return trimmed
 }
 
