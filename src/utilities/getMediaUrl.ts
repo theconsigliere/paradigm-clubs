@@ -1,18 +1,21 @@
 /**
  * Processes media resource URL to ensure proper formatting.
  *
- * Payload stores media files under the public media directory, and the frontend
- * should reference them as static assets rather than the Payload media API route.
+ * Payload may already provide a fully qualified storage URL (for example from
+ * Vercel storage or another adapter), so we should preserve that URL and only
+ * append a cache tag when needed.
  */
 export const getMediaUrl = (url: string | null | undefined, cacheTag?: string | null): string => {
   if (!url) return ''
 
-  const normalizedUrl = url.replace(/^\/api\/media\/file\//, '/media/')
+  const trimmedUrl = url.trim()
+  if (!trimmedUrl) return ''
 
-  if (cacheTag && cacheTag !== '') {
-    const encodedCacheTag = encodeURIComponent(cacheTag)
-    return `${normalizedUrl}?${encodedCacheTag}`
+  if (!cacheTag || cacheTag === '') {
+    return trimmedUrl
   }
 
-  return normalizedUrl
+  const encodedCacheTag = encodeURIComponent(cacheTag)
+
+  return trimmedUrl.includes('?') ? `${trimmedUrl}&${encodedCacheTag}` : `${trimmedUrl}?${encodedCacheTag}`
 }
