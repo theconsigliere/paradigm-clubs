@@ -1,23 +1,37 @@
 import canUseDOM from './canUseDOM'
 
+export const normalizeSiteURL = (value?: string) => {
+  if (!value) return ''
+
+  const trimmed = value.trim()
+  if (!trimmed) return ''
+
+  if (/^https?:\/\//i.test(trimmed)) {
+    return trimmed
+  }
+
+  if (/^\w+:\/\//i.test(trimmed)) {
+    return trimmed
+  }
+
+  if (/^localhost(?::\d+)?$/i.test(trimmed)) {
+    return `http://${trimmed}`
+  }
+
+  if (/^[^/\s]+$/i.test(trimmed)) {
+    return `https://${trimmed}`
+  }
+
+  return trimmed
+}
+
 const getVercelURL = () => {
-  if (process.env.NEXT_PUBLIC_SERVER_URL) {
-    return process.env.NEXT_PUBLIC_SERVER_URL
-  }
-
-  if (process.env.VERCEL_URL) {
-    return `https://${process.env.VERCEL_URL}`
-  }
-
-  if (process.env.VERCEL_BRANCH_URL) {
-    return `https://${process.env.VERCEL_BRANCH_URL}`
-  }
-
-  if (process.env.VERCEL_PROJECT_PRODUCTION_URL) {
-    return `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
-  }
-
-  return ''
+  return normalizeSiteURL(
+    process.env.NEXT_PUBLIC_SERVER_URL ||
+      process.env.VERCEL_URL ||
+      process.env.VERCEL_BRANCH_URL ||
+      process.env.VERCEL_PROJECT_PRODUCTION_URL,
+  )
 }
 
 export const getServerSideURL = () => {

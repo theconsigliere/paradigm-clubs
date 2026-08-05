@@ -1,12 +1,14 @@
 import type { Metadata } from 'next'
-import { getServerSideURL } from './getURL'
+import { getServerSideURL, normalizeSiteURL } from './getURL'
+
+const serverUrl = normalizeSiteURL(getServerSideURL())
 
 const defaultOpenGraph: Metadata['openGraph'] = {
   type: 'website',
   description: 'A premium training club for those who expect more from the way they exercise.',
   images: [
     {
-      url: `${getServerSideURL()}//P-META.webp`,
+      url: `${serverUrl}/P-META.webp`,
     },
   ],
   siteName: 'Paradigm',
