@@ -13,6 +13,7 @@ import { Header } from '@/Header/Component'
 import { Providers } from '@/providers'
 import { InitTheme } from '@/providers/Theme/InitTheme'
 import { mergeOpenGraph } from '@/utilities/mergeOpenGraph'
+import { normalizeSiteURL } from '@/utilities/getURL'
 import { draftMode } from 'next/headers'
 import { Analytics } from '@vercel/analytics/next'
 
@@ -77,14 +78,16 @@ export default async function RootLayout({ children }: { children: React.ReactNo
   )
 }
 
+const siteURL = normalizeSiteURL(
+  process.env.NEXT_PUBLIC_SERVER_URL ||
+    process.env.VERCEL_URL ||
+    process.env.VERCEL_BRANCH_URL ||
+    process.env.VERCEL_PROJECT_PRODUCTION_URL ||
+    'http://localhost:3000',
+)
+
 export const metadata: Metadata = {
-  metadataBase: new URL(
-    process.env.NEXT_PUBLIC_SERVER_URL ||
-      process.env.VERCEL_URL ||
-      process.env.VERCEL_BRANCH_URL ||
-      process.env.VERCEL_PROJECT_PRODUCTION_URL ||
-      'http://localhost:3000',
-  ),
+  metadataBase: new URL(siteURL),
   openGraph: mergeOpenGraph(),
   twitter: {
     card: 'summary_large_image',

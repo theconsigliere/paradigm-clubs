@@ -31,7 +31,8 @@ export const normalizeSiteURL = (value?: string) => {
 
 const getVercelURL = () => {
   return normalizeSiteURL(
-    process.env.VERCEL_URL ||
+    process.env.NEXT_PUBLIC_SERVER_URL ||
+      process.env.VERCEL_URL ||
       process.env.VERCEL_BRANCH_URL ||
       process.env.VERCEL_PROJECT_PRODUCTION_URL,
   )
