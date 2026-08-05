@@ -9,8 +9,10 @@ declare global {
       PARADIGM_POSTGRES_URL?: string
       PARADIGM_POSTGRES_URL_NON_POOLING?: string
       PARADIGM_POSTGRES_DATABASE?: string
-      NEXT_PUBLIC_SERVER_URL: string
-      VERCEL_PROJECT_PRODUCTION_URL: string
+      NEXT_PUBLIC_SERVER_URL?: string
+      VERCEL_URL?: string
+      VERCEL_BRANCH_URL?: string
+      VERCEL_PROJECT_PRODUCTION_URL?: string
     }
   }
 }
