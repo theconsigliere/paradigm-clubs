@@ -28,7 +28,8 @@ const dbConnectionString =
   process.env.POSTGRES_URL ||
   process.env.POSTGRES_PRISMA_URL ||
   process.env.POSTGRES_URL_NON_POOLING ||
-  process.env.DATABASE_URL
+  process.env.DATABASE_URL ||
+  process.env.DATABASE_URL_UNPOOLED
 
 if (!payloadSecret) {
   throw new Error(
@@ -38,7 +39,7 @@ if (!payloadSecret) {
 
 if (!dbConnectionString) {
   throw new Error(
-    'Missing database connection string. Set one of: PARADIGM_POSTGRES_URL, PARADIGM_POSTGRES_URL_NON_POOLING, POSTGRES_URL, POSTGRES_PRISMA_URL, POSTGRES_URL_NON_POOLING, or DATABASE_URL.',
+    'Missing database connection string. Set one of: PARADIGM_POSTGRES_URL, PARADIGM_POSTGRES_URL_NON_POOLING, POSTGRES_URL, POSTGRES_PRISMA_URL, POSTGRES_URL_NON_POOLING, DATABASE_URL, or DATABASE_URL_UNPOOLED.',
   )
 }
 
