@@ -31,6 +31,10 @@ if (!payloadSecret) {
   )
 }
 
+if (!process.env.BLOB_READ_WRITE_TOKEN) {
+  throw new Error('BLOB_READ_WRITE_TOKEN is missing — Vercel Blob will fall back to local disk')
+}
+
 if (!dbConnectionString) {
   throw new Error(
     'Missing database connection string. Set one of: PARADIGM_POSTGRES_URL, PARADIGM_POSTGRES_URL_NON_POOLING, POSTGRES_URL, POSTGRES_PRISMA_URL, POSTGRES_URL_NON_POOLING, DATABASE_URL, or DATABASE_URL_UNPOOLED.',
@@ -96,13 +100,13 @@ export default buildConfig({
   globals: [Header, Footer],
   plugins: [
     vercelBlobStorage({
-      enabled: true, // optional, defaults to true
-      // The keys MUST match your existing collection slugs
+      enabled: true,
       collections: {
         media: true,
       },
       token: process.env.BLOB_READ_WRITE_TOKEN,
-      clientUploads: true, // optional, defaults to true
+      clientUploads: true,
+      // addRandomSuffix removed per earlier step
     }),
     ...plugins,
   ],
