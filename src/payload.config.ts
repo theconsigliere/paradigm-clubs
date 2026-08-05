@@ -22,10 +22,17 @@ const dirname = path.dirname(filename)
 // Keep schema push opt-in to prevent local startup failures on shared/legacy databases.
 const shouldPushSchema = process.env.PAYLOAD_DB_PUSH === 'true'
 const payloadSecret = process.env.PAYLOAD_SECRET
+const dbConnectionString = process.env.POSTGRES_URL || process.env.DATABASE_URL
 
 if (!payloadSecret) {
   throw new Error(
     'Missing PAYLOAD_SECRET. Set a strong PAYLOAD_SECRET in your environment (Vercel: Project Settings -> Environment Variables).',
+  )
+}
+
+if (!dbConnectionString) {
+  throw new Error(
+    'Missing database connection string. Set POSTGRES_URL (recommended on Vercel) or DATABASE_URL.',
   )
 }
 
@@ -70,7 +77,7 @@ export default buildConfig({
   editor: defaultLexical,
   db: vercelPostgresAdapter({
     pool: {
-      connectionString: process.env.POSTGRES_URL || '',
+      connectionString: dbConnectionString,
     },
     // During active development, allow schema push by default so DB changes track config changes.
     // Override with PAYLOAD_DB_PUSH=false when you need to run dev without destructive sync.

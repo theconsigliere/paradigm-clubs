@@ -254,6 +254,11 @@ Required Vercel environment variables:
 - `CRON_SECRET` (optional): required only if you use the jobs endpoint with Vercel cron.
 - `PREVIEW_SECRET` (optional): required only if you use preview endpoints.
 
+First deploy / fresh database note:
+
+- If your database is brand new, set `PAYLOAD_DB_PUSH=true` for the first successful deployment so Payload can create/update tables.
+- After schema creation succeeds, set `PAYLOAD_DB_PUSH=false` (or remove it) to avoid unintended schema changes on later deploys.
+
 ```bash
 pnpm add @payloadcms/db-vercel-postgres
 ```
