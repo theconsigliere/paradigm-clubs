@@ -22,7 +22,13 @@ const dirname = path.dirname(filename)
 // Keep schema push opt-in to prevent local startup failures on shared/legacy databases.
 const shouldPushSchema = process.env.PAYLOAD_DB_PUSH === 'true'
 const payloadSecret = process.env.PAYLOAD_SECRET
-const dbConnectionString = process.env.POSTGRES_URL || process.env.DATABASE_URL
+const dbConnectionString =
+  process.env.PARADIGM_POSTGRES_URL ||
+  process.env.PARADIGM_POSTGRES_URL_NON_POOLING ||
+  process.env.POSTGRES_URL ||
+  process.env.POSTGRES_PRISMA_URL ||
+  process.env.POSTGRES_URL_NON_POOLING ||
+  process.env.DATABASE_URL
 
 if (!payloadSecret) {
   throw new Error(
@@ -32,7 +38,7 @@ if (!payloadSecret) {
 
 if (!dbConnectionString) {
   throw new Error(
-    'Missing database connection string. Set POSTGRES_URL (recommended on Vercel) or DATABASE_URL.',
+    'Missing database connection string. Set one of: PARADIGM_POSTGRES_URL, PARADIGM_POSTGRES_URL_NON_POOLING, POSTGRES_URL, POSTGRES_PRISMA_URL, POSTGRES_URL_NON_POOLING, or DATABASE_URL.',
   )
 }
 
