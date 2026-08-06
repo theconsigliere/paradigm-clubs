@@ -6,6 +6,7 @@ import {
   InlineToolbarFeature,
   lexicalEditor,
 } from '@payloadcms/richtext-lexical'
+import { link } from '@/fields/link'
 
 export const SignupBlock: Block = {
   slug: 'signupBlock',
@@ -38,6 +39,21 @@ export const SignupBlock: Block = {
           ]
         },
       }),
+    },
+    {
+      type: 'collapsible',
+      label: 'Button',
+      admin: {
+        initCollapsed: true,
+      },
+      fields: [
+        link({
+          appearances: false,
+          overrides: {
+            name: 'button',
+          },
+        }),
+      ],
     },
     {
       name: 'inputType',

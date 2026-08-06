@@ -4,7 +4,7 @@ import RichText from '@/components/RichText'
 
 import type { ContentBlock as ContentBlockProps } from '@/payload-types'
 
-import { CMSLink } from '../../components/Link'
+import { Button } from '@/components/Button'
 
 export const ContentBlock: React.FC<ContentBlockProps> = (props) => {
   const { columns } = props
@@ -22,9 +22,15 @@ export const ContentBlock: React.FC<ContentBlockProps> = (props) => {
                 className={cn('contentBlock__column', `contentBlock__column--${size}`)}
                 key={index}
               >
-                {richText && <RichText className="contentBlock__richText" data={richText} enableGutter={false} />}
+                {richText && (
+                  <RichText
+                    className="contentBlock__richText"
+                    data={richText}
+                    enableGutter={false}
+                  />
+                )}
 
-                {enableLink && <CMSLink className="contentBlock__link" {...link} />}
+                {enableLink && <Button className="contentBlock__link" {...link} />}
               </div>
             )
           })}

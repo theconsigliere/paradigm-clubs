@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { CMSLink } from '@/components/Link'
+import { Button } from '@/components/Button'
 import { Media } from '@/components/Media'
 import RichText from '@/components/RichText'
 import type { Media as MediaType } from '@/payload-types'
@@ -21,7 +21,7 @@ type TextFeatureBlockProps = {
   }> | null
   video?: MediaResource
   content?: DefaultTypedEditorState
-  button?: React.ComponentProps<typeof CMSLink>
+  button?: React.ComponentProps<typeof Button>
 }
 
 export const TextFeatureBlock: React.FC<TextFeatureBlockProps> = ({
@@ -93,7 +93,7 @@ export const TextFeatureBlock: React.FC<TextFeatureBlockProps> = ({
         </div>
         <div className="textFeatureBlock__text-section">
           {content && <RichText data={content} enableGutter={false} />}
-          {button && <CMSLink appearance={button.appearance} {...button} />}
+          {button && <Button {...button} />}
         </div>
       </div>
     </section>

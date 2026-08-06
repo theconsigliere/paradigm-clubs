@@ -1,6 +1,7 @@
 import { getCachedGlobal } from '@/utilities/getGlobals'
 import Link from 'next/link'
 
+import { Button } from '@/components/Button'
 import { CMSLink } from '@/components/Link'
 import { Media } from '@/components/Media'
 import RichText from '@/components/RichText'
@@ -18,8 +19,6 @@ export async function Header() {
   const navItems = openNavigation?.navItems || []
   const socialLinks = openNavigation?.socialLinks || []
 
-  console.log('headerData', headerData)
-
   return (
     <>
       <header className="pd__headered">
@@ -29,7 +28,10 @@ export async function Header() {
           </Link>
 
           {headerData?.pageCTAButton && (
-            <CMSLink className="pd__header-cta btn btn--primary" {...headerData.pageCTAButton} />
+            <Button
+              className="pd__header-cta btn--primary btn--primary--white"
+              {...headerData.pageCTAButton}
+            />
           )}
         </div>
       </header>
@@ -47,11 +49,7 @@ export async function Header() {
           )}
 
           {closedNavigation?.link && (
-            <CMSLink
-              className="pd__header-floating-nav-closed-link"
-              {...closedNavigation.link}
-              appearance="link"
-            />
+            <CMSLink className="pd__header-floating-nav-closed-link" {...closedNavigation.link} />
           )}
 
           {closedNavigation?.content && (

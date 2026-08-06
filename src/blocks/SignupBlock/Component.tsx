@@ -6,6 +6,7 @@ import { FormBlock as ExistingFormBlock } from '@/blocks/Form/Component'
 import type { Media as MediaType } from '@/payload-types'
 import type { Form as FormType } from '@payloadcms/plugin-form-builder/types'
 import type { DefaultTypedEditorState } from '@payloadcms/richtext-lexical'
+import { CMSLink } from '@/components/Link'
 
 type MediaResource = MediaType | string | number | null
 
@@ -15,6 +16,7 @@ type SignupBlockProps = {
   title?: string | null
   content?: DefaultTypedEditorState
   inputType?: 'image' | 'form' | null
+  button?: React.ComponentProps<typeof CMSLink>
   inputImage?: MediaResource
   inputForm?: FormType | string | number | null
 }
@@ -27,6 +29,7 @@ export const SignupBlock: React.FC<SignupBlockProps> = ({
   inputType,
   inputImage,
   inputForm,
+  button,
 }) => {
   return (
     <section className="signupBlock">
@@ -36,6 +39,7 @@ export const SignupBlock: React.FC<SignupBlockProps> = ({
           <div className="signupBlock__content">
             {title && <h2 className="signupBlock__title">{title}</h2>}
             {content && <RichText data={content} enableGutter={false} />}
+            {button && <CMSLink className="signupBlock__button btn--outline" {...button} />}
           </div>
 
           <div className="signupBlock__input">

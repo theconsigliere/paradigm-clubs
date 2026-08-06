@@ -48,6 +48,11 @@ export const FullWidthImageBlock: Block = {
       }),
     },
     {
+      name: 'inputForm',
+      type: 'relationship',
+      relationTo: 'forms',
+    },
+    {
       type: 'collapsible',
       label: 'Button',
       admin: {

@@ -1,10 +1,12 @@
 import React from 'react'
 
-import { CMSLink } from '@/components/Link'
 import { Media } from '@/components/Media'
 import RichText from '@/components/RichText'
 import type { Media as MediaType } from '@/payload-types'
 import type { DefaultTypedEditorState } from '@payloadcms/richtext-lexical'
+import type { Form as FormType } from '@payloadcms/plugin-form-builder/types'
+import { FormBlock as ExistingFormBlock } from '@/blocks/Form/Component'
+import { Button } from '@/components/ui/button'
 
 type MediaResource = MediaType | string | number | null
 
@@ -13,8 +15,9 @@ type FullWidthImageBlockProps = {
   subHeadline?: string | null
   logo?: MediaResource
   content?: DefaultTypedEditorState
-  button?: React.ComponentProps<typeof CMSLink>
+  button?: React.ComponentProps<typeof Button>
   embedCode?: string | null
+  inputForm?: FormType | string | number | null
   backgroundMedia?: MediaResource
 }
 
@@ -24,9 +27,9 @@ export const FullWidthImageBlock: React.FC<FullWidthImageBlockProps> = ({
   content,
   button,
   embedCode,
+  inputForm,
   backgroundMedia,
 }) => {
-  console.log('content', content)
   return (
     <section className="fullWidth">
       {backgroundMedia && (
@@ -46,7 +49,14 @@ export const FullWidthImageBlock: React.FC<FullWidthImageBlockProps> = ({
 
         <div className="fullWidth__text-content">
           {content && <RichText data={content} enableGutter={false} />}
-          {button && <CMSLink appearance={button.appearance} {...button} />}
+          {inputForm && typeof inputForm === 'object' && (
+            <div className="signupBlock__form">
+              <ExistingFormBlock enableIntro={false} form={inputForm as never} />
+            </div>
+          )}
+          {button && (
+            <Button className="fullWidth__button btn--primary btn--primary--white" {...button} />
+          )}
           {embedCode && (
             <div className="fullWidth__embed" dangerouslySetInnerHTML={{ __html: embedCode }} />
           )}

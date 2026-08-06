@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { CMSLink } from '@/components/Link'
+import { Button } from '@/components/Button'
 import { Media } from '@/components/Media'
 import RichText from '@/components/RichText'
 import type { Media as MediaType } from '@/payload-types'
@@ -22,7 +22,7 @@ type BreakdownBlockProps = {
   logo?: MediaResource
   title?: string | null
   description?: string | null
-  button?: React.ComponentProps<typeof CMSLink>
+  button?: React.ComponentProps<typeof Button>
   breakdownContent?: BreakdownItem[] | null
   subHeadlineBottom?: string | null
 }
@@ -53,13 +53,7 @@ export const BreakdownBlock: React.FC<BreakdownBlockProps> = ({
           <div className="breakdownBlock__title-section--right">
             <div className="breakdownBlock__title-section--right--inner">
               {description && <h6 className="breakdownBlock__description">{description}</h6>}
-              {button && (
-                <CMSLink
-                  className="breakdownBlock__button"
-                  appearance={button.appearance}
-                  {...button}
-                />
-              )}
+              {button && <Button className="breakdownBlock__button" {...button} />}
             </div>
           </div>
         </div>

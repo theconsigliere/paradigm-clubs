@@ -3,7 +3,7 @@ import type { DefaultTypedEditorState } from '@payloadcms/richtext-lexical'
 import React from 'react'
 
 import { FormBlock } from '@/blocks/Form/Component'
-import { CMSLink } from '@/components/Link'
+import { Button } from '@/components/Button'
 import RichText from '@/components/RichText'
 
 type ContactSectionBlockProps = {
@@ -18,7 +18,7 @@ type ContactSectionBlockProps = {
     | null
   buttons?:
     | {
-        link: React.ComponentProps<typeof CMSLink>
+        link: React.ComponentProps<typeof Button>
         id?: string | null
       }[]
     | null
@@ -49,7 +49,7 @@ export const ContactSectionBlock: React.FC<ContactSectionBlockProps> = ({
           {buttons && buttons.length > 0 && (
             <div className="contactSection__buttons">
               {buttons.map(({ link }, index) => (
-                <CMSLink appearance={link.appearance} key={index} {...link} />
+                <Button key={index} {...link} />
               ))}
             </div>
           )}

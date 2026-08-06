@@ -30,7 +30,8 @@ export const VideoHero: React.FC<VideoHeroProps> = ({
   mainFocusLogo,
 }) => {
   const backgroundIsVideo = backgroundMedia ? isVideoResource(backgroundMedia) : false
-  const backgroundVideoUrl = backgroundMedia && isPopulatedMedia(backgroundMedia) ? backgroundMedia.url : undefined
+  const backgroundVideoUrl =
+    backgroundMedia && isPopulatedMedia(backgroundMedia) ? backgroundMedia.url : undefined
 
   return (
     <section className="videoHero" data-theme="dark">

@@ -211,17 +211,18 @@ p, .p {
 	}
 
 	@media (min-width: 1440px) {
-		font-size: 1.15rem;
+		font-size: 1.1rem;
 	}
 
 	@media (min-width: 1820px) {
-		font-size: 1.2rem;
+		font-size: 1.1rem;
 	}
 
 	@media (min-width: 1920px) {
-		font-size: 1.2rem;
+		font-size: 1.1rem;
 	}
 }
+
 
 
 .p-smallest {
@@ -256,6 +257,6 @@ p, .p {
 }
 
 .cursive, em {
-	font-family: var(--font-dm-serif-display), serif;
+	font-family: var(--font-instrument-serif), serif;
 	font-style: italic;
 }

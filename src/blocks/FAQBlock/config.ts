@@ -28,6 +28,20 @@ export const FAQBlock: Block = {
       type: 'text',
     },
     {
+      name: 'content',
+      type: 'richText',
+      editor: lexicalEditor({
+        features: ({ rootFeatures }) => {
+          return [
+            ...rootFeatures,
+            HeadingFeature({ enabledHeadingSizes: ['h2', 'h3', 'h4'] }),
+            FixedToolbarFeature(),
+            InlineToolbarFeature(),
+          ]
+        },
+      }),
+    },
+    {
       type: 'collapsible',
       label: 'Button',
       admin: {

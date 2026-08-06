@@ -1,14 +1,15 @@
 import React from 'react'
 
-import { CMSLink } from '@/components/Link'
 import RichText from '@/components/RichText'
 import type { DefaultTypedEditorState } from '@payloadcms/richtext-lexical'
+import { Button } from '@/components/Button'
 
 type FAQBlockProps = {
   blockId: string
   subHeadline?: string | null
   title?: string | null
-  button?: React.ComponentProps<typeof CMSLink>
+  button?: React.ComponentProps<typeof Button>
+  content?: DefaultTypedEditorState | null
   faqs?: Array<{
     faqItem?: {
       question?: string | null
@@ -18,11 +19,11 @@ type FAQBlockProps = {
 }
 
 export const FAQBlock: React.FC<FAQBlockProps> = ({
-  blockId,
   subHeadline,
   title,
   button,
   faqs,
+  content,
 }) => {
   return (
     <div className="faqBlock">
@@ -32,9 +33,8 @@ export const FAQBlock: React.FC<FAQBlockProps> = ({
           <div className="faqBlock__title-group">
             {title && <h2 className="faqBlock__title">{title}</h2>}
           </div>
-          {button && (
-            <CMSLink className="faqBlock__button" appearance={button.appearance} {...button} />
-          )}
+          {content && <RichText data={content} enableGutter={false} />}
+          {button && <Button className="faqBlock__button btn--outline" {...button} />}
         </div>
 
         <div className="faqBlock__section">

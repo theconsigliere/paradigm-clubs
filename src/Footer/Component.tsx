@@ -2,7 +2,7 @@ import { getCachedGlobal } from '@/utilities/getGlobals'
 import Link from 'next/link'
 
 import { ThemeSelector } from '@/providers/Theme/ThemeSelector'
-import { CMSLink } from '@/components/Link'
+import { Button } from '@/components/Button'
 import { Logo } from '@/components/Logo/Logo'
 import { Media } from '@/components/Media'
 
@@ -24,7 +24,7 @@ export async function Footer() {
             {getInTouch?.title && <h3 className="pd__footer-title">{getInTouch.title}</h3>}
           </div>
           <div className="pd__footer-top-section--right">
-            {getInTouch?.button && <CMSLink className="pd__footer-link" {...getInTouch.button} />}
+            {getInTouch?.button && <Button className="pd__footer-link" {...getInTouch.button} />}
           </div>
         </div>
 
@@ -49,7 +49,7 @@ export async function Footer() {
             {/* <ThemeSelector /> */}
             <nav className="pd__footer-nav">
               {navItems.map(({ link }, i) => {
-                return <CMSLink className="pd__footer-link mono p-small" key={i} {...link} />
+                return <Button className="pd__footer-link mono p-small" key={i} {...link} />
               })}
             </nav>
           </div>

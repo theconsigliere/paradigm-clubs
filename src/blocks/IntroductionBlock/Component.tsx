@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { CMSLink } from '@/components/Link'
+import { Button } from '@/components/Button'
 import { Media } from '@/components/Media'
 import RichText from '@/components/RichText'
 import type { Media as MediaType } from '@/payload-types'
@@ -20,7 +20,7 @@ type IntroductionBlockProps = {
   blockId: string
   subHeadline?: string | null
   trainingContent?: IntroductionItem[] | null
-  button?: React.ComponentProps<typeof CMSLink>
+  button?: React.ComponentProps<typeof Button>
 }
 
 export const IntroductionBlock: React.FC<IntroductionBlockProps> = ({
@@ -78,7 +78,7 @@ export const IntroductionBlock: React.FC<IntroductionBlockProps> = ({
 
       <div className="intro__item-stopper intro__item">
         <div className="intro__item--text-group">
-          {button && <CMSLink className="yessss" appearance={button.appearance} {...button} />}
+          {button && <Button className="yessss" {...button} />}
         </div>
       </div>
     </div>

@@ -900,6 +900,7 @@ export interface FullWidthImageBlock {
     };
     [k: string]: unknown;
   } | null;
+  inputForm?: (number | null) | Form;
   button: {
     type?: ('reference' | 'custom') | null;
     newTab?: boolean | null;
@@ -1063,6 +1064,21 @@ export interface SignupBlock {
     };
     [k: string]: unknown;
   } | null;
+  button: {
+    type?: ('reference' | 'custom') | null;
+    newTab?: boolean | null;
+    reference?:
+      | ({
+          relationTo: 'pages';
+          value: number | Page;
+        } | null)
+      | ({
+          relationTo: 'posts';
+          value: number | Post;
+        } | null);
+    url?: string | null;
+    label: string;
+  };
   inputType?: ('image' | 'form') | null;
   inputImage?: (number | null) | Media;
   inputForm?: (number | null) | Form;
@@ -1078,6 +1094,21 @@ export interface FAQBlock {
   blockId: string;
   subHeadline?: string | null;
   title?: string | null;
+  content?: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
   button: {
     type?: ('reference' | 'custom') | null;
     newTab?: boolean | null;
@@ -1640,6 +1671,7 @@ export interface FullWidthImageBlockSelect<T extends boolean = true> {
   subHeadline?: T;
   logo?: T;
   content?: T;
+  inputForm?: T;
   button?:
     | T
     | {
@@ -1733,6 +1765,15 @@ export interface SignupBlockSelect<T extends boolean = true> {
   subHeadline?: T;
   title?: T;
   content?: T;
+  button?:
+    | T
+    | {
+        type?: T;
+        newTab?: T;
+        reference?: T;
+        url?: T;
+        label?: T;
+      };
   inputType?: T;
   inputImage?: T;
   inputForm?: T;
@@ -1747,6 +1788,7 @@ export interface FAQBlockSelect<T extends boolean = true> {
   blockId?: T;
   subHeadline?: T;
   title?: T;
+  content?: T;
   button?:
     | T
     | {

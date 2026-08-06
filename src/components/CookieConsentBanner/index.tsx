@@ -2,6 +2,8 @@
 
 import { useCallback, useEffect, useRef, useState } from 'react'
 
+import { Button } from '@/components/Button'
+
 const CONSENT_KEY = 'pd_cookie_consent'
 const CONSENT_COOKIE = 'pd_cookie_consent'
 const CONSENT_MAX_AGE = 60 * 60 * 24 * 365
@@ -97,29 +99,25 @@ export const CookieConsentBanner = () => {
       ref={bannerRef}
     >
       <div className="pd__cookie-banner-inner">
-        <p className="pd__cookie-banner-title" id="pd-cookie-banner-title">
+        <h5 className="pd__cookie-banner-title" id="pd-cookie-banner-title">
           Cookie Preferences
-        </p>
+        </h5>
         <p className="pd__cookie-banner-text" id="pd-cookie-banner-text">
           We use analytics cookies to understand site usage and improve your experience. Read our{' '}
           <a href="/legal/privacy-policy">privacy policy</a> to learn more.
         </p>
 
         <div className="pd__cookie-banner-actions">
-          <button
-            className="btn btn--white"
-            onClick={() => updateConsent('rejected')}
-            type="button"
-          >
-            Decline
-          </button>
-          <button
-            className="btn btn--primary"
+          <Button
+            className="btn btn--primary btn--primary--white"
             onClick={() => updateConsent('accepted')}
-            type="button"
-          >
-            Accept
-          </button>
+            label="Accept"
+          />
+          <Button
+            className="btn btn--outline btn--outline--white"
+            onClick={() => updateConsent('rejected')}
+            label="Decline"
+          />
         </div>
       </div>
     </aside>
