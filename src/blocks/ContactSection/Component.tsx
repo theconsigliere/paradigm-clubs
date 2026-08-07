@@ -30,7 +30,7 @@ export const ContactSectionBlock: React.FC<ContactSectionBlockProps> = ({
   buttons,
 }) => {
   return (
-    <section className="contactSection pd__container">
+    <section className="contactSection">
       <div className="contactSection__inner pd__container">
         <div className="contactSection__info">
           {contactInfo?.map((item, index) => {
