@@ -10,8 +10,10 @@ type ButtonProps = Omit<UIButtonProps, 'variant' | 'type'> & {
   children?: React.ReactNode
   classNames?: string | null
   href?: string | null
+  url?: string | null
   label?: string | null
   newTab?: boolean | null
+  appearance?: 'default' | 'outline' | null
   reference?: {
     relationTo: 'pages' | 'posts'
     value: Page | Post | string | number
@@ -22,16 +24,15 @@ type ButtonProps = Omit<UIButtonProps, 'variant' | 'type'> & {
 
 const isExternal = (href: string): boolean => /^(?:[a-z][a-z\d+.-]*:|\/\/)/i.test(href)
 
-// Normalize a custom href: keep paths/anchors, add protocol to bare domains.
+const isHashLink = (href: string): boolean => href.startsWith('#')
+
 const normalizeCustomHref = (value?: string | null): string | undefined => {
   const trimmed = value?.trim()
   if (!trimmed) return undefined
   if (trimmed.startsWith('/') || trimmed.startsWith('#') || isExternal(trimmed)) return trimmed
-  return `https://${trimmed}` // bare hostname (incl. www.) → external
+  return `https://${trimmed}`
 }
 
-// Build an internal href from a reference. Requires the linked doc to be
-// populated (has `slug`) — a bare ID means the query depth was too low.
 const resolveReferenceHref = (reference: ButtonProps['reference']): string | undefined => {
   const value = reference?.value
   if (!reference?.relationTo || value == null) return undefined
@@ -53,21 +54,33 @@ export const Button: React.FC<ButtonProps> = ({
   className,
   classNames,
   href,
+  url,
   label,
   newTab,
   reference,
   type,
+  appearance,
+  variant,
   ...props
 }) => {
+  const effectiveHref = href ?? url
+  const effectiveVariant: ButtonVariant =
+    variant ?? (appearance === 'outline' ? 'outline' : 'default')
+
   const resolvedHref =
-    type === 'reference' ? resolveReferenceHref(reference) : normalizeCustomHref(href)
+    type === 'reference' ? resolveReferenceHref(reference) : normalizeCustomHref(effectiveHref)
 
   const { onClick, ...elementProps } = props as React.AnchorHTMLAttributes<HTMLAnchorElement> &
     React.ButtonHTMLAttributes<HTMLButtonElement> & {
       onClick?: React.MouseEventHandler<HTMLButtonElement | HTMLAnchorElement>
     }
 
-  const combinedClassName = cn('btn', className, classNames)
+  const combinedClassName = cn(
+    'btn',
+    effectiveVariant === 'outline' && 'btn--outline',
+    className,
+    classNames,
+  )
   const newTabProps = newTab ? { rel: 'noopener noreferrer', target: '_blank' } : {}
 
   const content = label && (
@@ -77,7 +90,6 @@ export const Button: React.FC<ButtonProps> = ({
     </span>
   )
 
-  // No usable href → render a real button.
   if (!resolvedHref) {
     return (
       <button
@@ -92,6 +104,15 @@ export const Button: React.FC<ButtonProps> = ({
     )
   }
 
+  if (isHashLink(resolvedHref)) {
+    return (
+      <a href={resolvedHref} className={combinedClassName} onClick={onClick} {...elementProps}>
+        {content}
+        {children}
+      </a>
+    )
+  }
+
   const linkProps = {
     className: combinedClassName,
     onClick,
@@ -99,7 +120,6 @@ export const Button: React.FC<ButtonProps> = ({
     ...newTabProps,
   }
 
-  // External URLs use a plain <a>; internal paths use Next <Link> for client-side routing.
   if (isExternal(resolvedHref)) {
     return (
       <a href={resolvedHref} {...linkProps}>
