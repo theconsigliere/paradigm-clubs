@@ -33,11 +33,16 @@ export const VideoHero: React.FC<VideoHeroProps> = ({
   const backgroundVideoUrl =
     backgroundMedia && isPopulatedMedia(backgroundMedia) ? backgroundMedia.url : undefined
 
+  console.log('VideoHero backgroundMedia:', backgroundMedia)
+  console.log('VideoHero backgroundIsVideo:', backgroundIsVideo)
+  console.log('VideoHero backgroundVideoUrl:', backgroundVideoUrl)
+
   return (
     <section className="videoHero" data-theme="dark">
       <div className="videoHero__overlay"></div>
       <div className="videoHero__inner pd__container">
         <div className="videoHero__video-background">
+          {/*  {backgroundMedia && backgroundIsVideo && backgroundVideoUrl && ( */}
           {backgroundMedia && backgroundIsVideo && backgroundVideoUrl && (
             <video
               className="videoHero__video"
