@@ -791,8 +791,14 @@
 
 .formBlock__form .formBlock__fields > .formBlock__field[style*="max-width:50%"],
 .formBlock__form .formBlock__fields > .formBlock__field[style*="max-width: 50%"] {
-    flex: 0 0 calc(50% - 0.5rem);
+       flex: 0 0 100%;
+    max-width: 100% !important;
+
+
+    @media (min-width: 992px ) {
+        flex: 0 0 calc(50% - 0.5rem);
     max-width: calc(50% - 0.5rem) !important;
+    }
 }
 
 .formBlock__form .formBlock__fields > .formBlock__field[style*="max-width:100%"],
