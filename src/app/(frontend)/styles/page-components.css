@@ -921,13 +921,17 @@
     gap: 1rem;
     justify-items: start;
     width: 95%;
-    padding: 2rem;
+    padding: 1rem;
     position: relative;
     z-index: 2;
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
+
+    @media (min-width: 576px) {
+        padding: 2rem;
+    }
 
     @media (min-width: 992px ) {
     width: 75%;
@@ -978,7 +982,7 @@
 
 .signupBlock {} 
 .signupBlock__inner {
-    padding: 5rem 0;
+    padding: 3rem 0 2rem;
     position: relative;
     display: flex;
     flex-direction: column;
@@ -1065,14 +1069,14 @@
 }
 
 .faqBlock__inner {
-    padding: 5rem 0;
+    padding: 3rem 0 2rem;
     position: relative;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     justify-content: center;
     gap: 2rem;
-
+    border-bottom: 1px solid var(--p-grey);
 
    @media (min-width: 992px ) {
     padding: 10rem 0;
@@ -1158,6 +1162,11 @@
         /* transform-origin: center cente;
         transform: rotate(0deg); */
     }  
+}
+
+.faqBlock__summary-text {
+    text-wrap: balance;
+    max-width: 85%;
 }
 
 

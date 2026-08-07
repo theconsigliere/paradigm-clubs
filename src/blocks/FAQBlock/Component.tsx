@@ -44,7 +44,9 @@ export const FAQBlock: React.FC<FAQBlockProps> = ({
                 if (!item?.question) return null
                 return (
                   <details className="faqBlock__item" key={index}>
-                    <summary className="faqBlock__summary h4">{item.question}</summary>
+                    <summary className="faqBlock__summary">
+                      <h4 className="faqBlock__summary-text">{item.question}</h4>
+                    </summary>
                     {item.answer && (
                       <div className="faqBlock__answer">
                         <RichText data={item.answer} enableGutter={false} />
