@@ -40,7 +40,7 @@ export const VideoHero: React.FC<VideoHeroProps> = ({
 
   return (
     <section className="videoHero" data-theme="dark">
-      <div className="videoHero__overlay"></div>
+      <div className="videoHero__overlay hero__overlay"></div>
       <div className="videoHero__inner pd__container">
         <div className="videoHero__video-background">
           {/*  {backgroundMedia && backgroundIsVideo && backgroundVideoUrl && ( */}
