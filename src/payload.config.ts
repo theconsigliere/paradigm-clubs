@@ -42,7 +42,7 @@ if (!dbConnectionString) {
 
 export default buildConfig({
   email: resendAdapter({
-    defaultFromAddress: 'info@paradigm-clubs.com', // must be on a verified domain
+    defaultFromAddress: 'info@updates.paradigm-clubs.com', // must be on a verified domain
     defaultFromName: 'Paradigm',
     apiKey: process.env.RESEND_API_KEY || '',
   }),
