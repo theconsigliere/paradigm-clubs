@@ -31,31 +31,40 @@ export const ContactSectionBlock: React.FC<ContactSectionBlockProps> = ({
 }) => {
   return (
     <section className="contactSection pd__container">
-      <div className="contactSection__inner">
+      <div className="contactSection__inner pd__container">
         <div className="contactSection__info">
           {contactInfo?.map((item, index) => {
             if (!item?.content) return null
 
             return (
-              <RichText
-                className="contactSection__info-item"
-                data={item.content}
-                enableGutter={false}
-                key={item.id || index}
-              />
+              <div className="contactSection__item">
+                <div className="contactSection__item-index mono">0{index + 1}</div>
+                <div className="contactSection__item-text">
+                  <RichText
+                    className="contactSection__info-item"
+                    data={item.content}
+                    enableGutter={false}
+                    key={item.id || index}
+                  />
+                </div>
+              </div>
             )
           })}
 
           {buttons && buttons.length > 0 && (
             <div className="contactSection__buttons">
               {buttons.map(({ link }, index) => (
-                <Button key={index} {...link} />
+                <Button
+                  key={index}
+                  className={`contactSection__button ${index === 0 ? 'btn--primary' : 'btn--outline'}`}
+                  {...link}
+                />
               ))}
             </div>
           )}
         </div>
 
-        <div className="contactSection__form">
+        <div className="contactSection__form-section">
           <FormBlock enableIntro={false} form={form} />
         </div>
       </div>

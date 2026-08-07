@@ -31,6 +31,14 @@
     "editor.formatOnSave": true
   },
   "editor.formatOnSaveMode": "file",
+  "editor.snippetSuggestions": "top",
+  "editor.quickSuggestions": {
+    "other": true,
+    "comments": false,
+    "strings": true
+  },
+  "editor.suggest.showSnippets": true,
+  "editor.tabCompletion": "on",
   "js/ts.tsdk.path": "node_modules/typescript/lib",
   "js/ts.tsdk.promptToUseWorkspaceVersion": true,
   "[javascript][typescript][typescriptreact]": {

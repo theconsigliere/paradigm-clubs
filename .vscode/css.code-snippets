@@ -1,32 +1,66 @@
 {
-  "Flex Row": {
-    "scope": "css,scss,less,postcss",
-    "prefix": "flex",
-    "body": [
-      "display: flex;",
-      "flex-direction: row;",
-      "align-items: center;",
-      "justify-content: space-between;"
-    ],
-    "description": "Create a horizontal flex container"
+  "Media Query (Custom)": {
+    "prefix": "mq",
+    "scope": "css,scss,postcss",
+    "body": ["@media (min-width: ${1:768px}) {", "\t${2}", "}"],
+    "description": "create a custom min-width media query"
   },
-  "Flex Center": {
-    "scope": "css,scss,less,postcss",
-    "prefix": "flexc",
-    "body": [
-      "display: flex;",
-      "align-items: center;",
-      "justify-content: center;"
-    ],
-    "description": "Create a centered flex container"
+  "Media Extra Small": {
+    "prefix": "mq-xs",
+    "scope": "css,scss,postcss",
+    "body": ["@media (min-width: 0px) {", "\t${1}", "}"],
+    "description": "create media query for extra small devices"
   },
-  "Flex Column": {
-    "scope": "css,scss,less,postcss",
-    "prefix": "flexcol",
+  "Media Small": {
+    "prefix": "mq-sm",
+    "scope": "css,scss,postcss",
+    "body": ["@media (min-width: 576px) {", "\t${1}", "}"],
+    "description": "create media query for small devices"
+  },
+  "Media Medium": {
+    "prefix": "mq-md",
+    "scope": "css,scss,postcss",
+    "body": ["@media (min-width: 768px) {", "\t${1}", "}"],
+    "description": "create media query for medium devices"
+  },
+  "Media Large": {
+    "prefix": "mq-lg",
+    "scope": "css,scss,postcss",
+    "body": ["@media (min-width: 992px) {", "\t${1}", "}"],
+    "description": "create media query for large devices"
+  },
+  "Media Extra Large": {
+    "prefix": "mq-xl",
+    "scope": "css,scss,postcss",
+    "body": ["@media (min-width: 1200px) {", "\t${1}", "}"],
+    "description": "create media query for XL devices"
+  },
+  "Media XXL": {
+    "prefix": "mq-xxl",
+    "scope": "css,scss,postcss",
+    "body": ["@media (min-width: 1440px) {", "\t${1}", "}"],
+    "description": "create media query for xxl devices"
+  },
+  "Flex: Center Between": {
+    "prefix": "flx-cb",
+    "scope": "css,scss,postcss",
     "body": [
       "display: flex;",
-      "flex-direction: column;"
+      "justify-content: space-between;",
+      "align-items: center;",
+      "flex-direction: row;"
     ],
-    "description": "Create a vertical flex container"
+    "description": "create flexbox with center between"
+  },
+  "Flex: Center Center": {
+    "prefix": "flx-cc",
+    "scope": "css,scss,postcss",
+    "body": [
+      "display: flex;",
+      "justify-content: center;",
+      "align-items: center;",
+      "flex-direction: row;"
+    ],
+    "description": "create flexbox with center center"
   }
 }

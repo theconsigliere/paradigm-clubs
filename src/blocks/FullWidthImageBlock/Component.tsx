@@ -6,7 +6,7 @@ import type { Media as MediaType } from '@/payload-types'
 import type { DefaultTypedEditorState } from '@payloadcms/richtext-lexical'
 import type { Form as FormType } from '@payloadcms/plugin-form-builder/types'
 import { FormBlock as ExistingFormBlock } from '@/blocks/Form/Component'
-import { Button } from '@/components/ui/button'
+import { Button } from '@/components/Button'
 
 type MediaResource = MediaType | string | number | null
 
@@ -50,7 +50,7 @@ export const FullWidthImageBlock: React.FC<FullWidthImageBlockProps> = ({
         <div className="fullWidth__text-content">
           {content && <RichText data={content} enableGutter={false} />}
           {inputForm && typeof inputForm === 'object' && (
-            <div className="signupBlock__form">
+            <div className="fullWidth__form formMaster">
               <ExistingFormBlock enableIntro={false} form={inputForm as never} />
             </div>
           )}

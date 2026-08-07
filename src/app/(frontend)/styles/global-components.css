@@ -3,6 +3,18 @@
 .pd__container {
     width: 95%;
     margin: 0 auto;
+
+    @media (min-width: 1920px) {
+    width: 75%;
+    }
+}
+
+section {
+    background-color: var(--p-white);
+}
+
+.formMaster {
+    width: 100%;
 }
 
 .btn {
@@ -17,6 +29,7 @@
     width: fit-content;
     font-size: 0.875rem;
     cursor: pointer;
+    text-align: center;
 
     &:hover {
 
@@ -66,8 +79,7 @@
     cursor: pointer;
 
     &:hover {
-        background-color: var(--p-white);
-        color: var(--p-black);
+
     }
 
     &.btn--primary--white {
@@ -114,6 +126,7 @@
         }
     }
 }
+
 
 
 
@@ -238,16 +251,34 @@
 .pd__footer-inner {
     display: flex;
     flex-direction: column;
-    padding: 8rem 0 20rem;
+    padding: 5rem 0 10rem;
+
+
+    @media (min-width: 992px ) {
+       padding: 8rem 0 20rem;
+    }
 }
 
 .pd__footer-top-section {
     display: flex;
-    justify-content: space-between;
-    align-items: flex-end;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
     padding-bottom: 2rem;
     border-bottom: 1px solid var(--p-white);
     margin-bottom: 5rem;
+    width: 100%;
+    gap: 1rem;
+
+    @media (min-width: 768px ) {
+        gap: 0;
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-end;
+        flex-direction: row;
+    }
+
+    
 }
 
 
@@ -259,7 +290,7 @@
 }
 
 .pd__footer-logo {
-width: 100%;
+    width: 100%;
     height: auto;
 }
 
@@ -281,6 +312,29 @@ width: 100%;
     font-weight: 500;
 }
 
+.pd__footer-top-section--left {
+    flex: 0 0 100%;
+    width: 100%;
+
+    @media (min-width: 768px ) {
+      flex: 1;
+    }
+}
+
+.pd__footer-top-section--right {
+    flex: 0 0 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex-direction: row;
+    width: 100%;
+
+    @media (min-width: 768px ) {
+      flex: 1;
+      justify-content: flex-end;
+    }
+}
+
 .pd__footer-link {
     color: inherit;
 }
@@ -294,7 +348,11 @@ width: 100%;
 
 .pd__footer-bottom-content {
     width: 100%;
-    margin: 5rem 0 0;
+    margin: 1rem 0 0;
+
+    @media (min-width: 992px ) {
+      margin: 5rem 0 0;
+    }
 
 }
 
@@ -305,9 +363,16 @@ width: 100%;
 .pd__footer-nav {
     width: 100%;
     display: flex;
-    flex-direction: row;
-    justify-content: space-between;
+    flex-direction: column;
+    justify-content: center;
     align-items: center;
+
+    @media (min-width: 768px ) {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: row;
+    }
 }
 
 .pd__footer-link {

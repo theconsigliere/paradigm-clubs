@@ -53,7 +53,7 @@ export const BreakdownBlock: React.FC<BreakdownBlockProps> = ({
           <div className="breakdownBlock__title-section--right">
             <div className="breakdownBlock__title-section--right--inner">
               {description && <h6 className="breakdownBlock__description">{description}</h6>}
-              {button && <Button className="breakdownBlock__button" {...button} />}
+              {button && <Button className="breakdownBlock__button btn--primary" {...button} />}
             </div>
           </div>
         </div>

@@ -27,23 +27,23 @@ export const BasicHero: React.FC<BasicHeroProps> = ({
   const mediaResource = mediaType === 'video' ? video : image
 
   return (
-    <section className="container py-16 md:py-24">
-      <div className="max-w-3xl space-y-5 basicHero__content">
-        {subHeadline && (
-          <p className="text-sm uppercase tracking-wider text-muted-foreground">{subHeadline}</p>
-        )}
-        {title && <h1 className="text-4xl md:text-6xl font-semibold text-balance">{title}</h1>}
+    <section className="basicHero">
+      {mediaResource && (
+        <div className="basicHero__media-background">
+          <div className="hero__overlay"></div>
+          <Media
+            htmlElement={null}
+            imgClassName="w-full h-auto"
+            videoClassName="w-full h-auto"
+            resource={mediaResource}
+          />
+        </div>
+      )}
+
+      <div className="pd__container basicHero__content">
+        {subHeadline && <p className="mono basicHero__eyebrow">{subHeadline}</p>}
+        {title && <h1 className="basicHero__title">{title}</h1>}
         {content && <RichText data={content} enableGutter={false} />}
-        {mediaResource && (
-          <div className="basicHero__media">
-            <Media
-              htmlElement={null}
-              imgClassName="w-full h-auto"
-              videoClassName="w-full h-auto"
-              resource={mediaResource}
-            />
-          </div>
-        )}
       </div>
     </section>
   )

@@ -33,10 +33,12 @@ export const LegalPage: React.FC<{ doc: LegalPageDoc }> = ({ doc }) => {
 
   return (
     <article className={cn(block)}>
-      <div className={cn(`${block}__inner`)}>
-        <h1 className={cn(`${block}__title`)}>{doc.title}</h1>
-        <div className={cn(`${block}__content`)}>
-          <RichText data={doc.content as DefaultTypedEditorState} />
+      <div className={cn(`${block}__inner pd__container`)}>
+        <div className={cn(`${block}__inner-content`)}>
+          <h1 className={cn(`${block}__title`)}>{doc.title}</h1>
+          <div className={cn(`${block}__content`)}>
+            <RichText data={doc.content as DefaultTypedEditorState} />
+          </div>
         </div>
       </div>
     </article>

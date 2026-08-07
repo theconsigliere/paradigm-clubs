@@ -78,7 +78,7 @@ export const IntroductionBlock: React.FC<IntroductionBlockProps> = ({
 
       <div className="intro__item-stopper intro__item">
         <div className="intro__item--text-group">
-          {button && <Button className="yessss" {...button} />}
+          {button && <Button className="btn--primary" {...button} />}
         </div>
       </div>
     </div>

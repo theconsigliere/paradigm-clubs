@@ -24,7 +24,12 @@ export async function Footer() {
             {getInTouch?.title && <h3 className="pd__footer-title">{getInTouch.title}</h3>}
           </div>
           <div className="pd__footer-top-section--right">
-            {getInTouch?.button && <Button className="pd__footer-link" {...getInTouch.button} />}
+            {getInTouch?.button && (
+              <Button
+                className="pd__footer-link btn--primary btn--primary--white"
+                {...getInTouch.button}
+              />
+            )}
           </div>
         </div>
 
@@ -49,7 +54,9 @@ export async function Footer() {
             {/* <ThemeSelector /> */}
             <nav className="pd__footer-nav">
               {navItems.map(({ link }, i) => {
-                return <Button className="pd__footer-link mono p-small" key={i} {...link} />
+                return (
+                  <Button className="pd__footer-link mono p-small btn--primary" key={i} {...link} />
+                )
               })}
             </nav>
           </div>

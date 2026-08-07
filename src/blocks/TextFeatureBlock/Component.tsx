@@ -38,7 +38,7 @@ export const TextFeatureBlock: React.FC<TextFeatureBlockProps> = ({
 
   return (
     <section className="textFeatureBlock">
-      <div className="textFeatureBlock__inner">
+      <div className="textFeatureBlock__inner pd__container">
         <div className="textFeatureBlock__top-section">
           {subHeadline && (
             <p className="mono textFeatureBlock__sub-headline p-small">{subHeadline}</p>
@@ -93,7 +93,7 @@ export const TextFeatureBlock: React.FC<TextFeatureBlockProps> = ({
         </div>
         <div className="textFeatureBlock__text-section">
           {content && <RichText data={content} enableGutter={false} />}
-          {button && <Button {...button} />}
+          {button && <Button className="btn--outline btn--outline--white" {...button} />}
         </div>
       </div>
     </section>

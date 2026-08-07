@@ -16,7 +16,7 @@ type ButtonProps = Omit<UIButtonProps, 'variant' | 'type'> & {
     relationTo: 'pages' | 'posts'
     value: Page | Post | string | number
   } | null
-  type?: 'custom' | 'reference' | null
+  type?: 'button' | 'submit' | 'reset' | 'custom' | 'reference' | null
   variant?: ButtonVariant | null
 }
 
@@ -42,21 +42,21 @@ export const Button: React.FC<ButtonProps> = ({
       ? `${reference.relationTo !== 'pages' ? `/${reference.relationTo}` : ''}/${reference.value.slug}`
       : href || undefined
 
-  const {
-    onClick,
-    type: _buttonType,
-    ...elementProps
-  } = props as React.AnchorHTMLAttributes<HTMLAnchorElement> &
+  const { onClick, ...elementProps } = props as React.AnchorHTMLAttributes<HTMLAnchorElement> &
     React.ButtonHTMLAttributes<HTMLButtonElement> & {
       onClick?: React.MouseEventHandler<HTMLButtonElement | HTMLAnchorElement>
-      type?: never
     }
   const newTabProps = newTab ? { rel: 'noopener noreferrer', target: '_blank' } : {}
   const combinedClassName = cn('btn', className, classNames)
 
   if (!resolvedHref) {
     return (
-      <button className={combinedClassName} onClick={onClick} type="button" {...elementProps}>
+      <button
+        className={combinedClassName}
+        onClick={onClick}
+        type={type === 'submit' || type === 'reset' ? type : 'button'}
+        {...elementProps}
+      >
         {label && (
           <span className="btn__label--container" data-slot="button-label">
             <span className="btn__label btn__label--first">{label}</span>

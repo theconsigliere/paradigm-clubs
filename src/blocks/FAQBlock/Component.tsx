@@ -36,15 +36,12 @@ export const FAQBlock: React.FC<FAQBlockProps> = ({
           {content && <RichText data={content} enableGutter={false} />}
           {button && <Button className="faqBlock__button btn--outline" {...button} />}
         </div>
-
         <div className="faqBlock__section">
           {Array.isArray(faqs) && faqs.length > 0 && (
             <div className="faqBlock__list">
               {faqs.map((entry, index) => {
                 const item = entry.faqItem
-
                 if (!item?.question) return null
-
                 return (
                   <details className="faqBlock__item" key={index}>
                     <summary className="faqBlock__summary h4">{item.question}</summary>
