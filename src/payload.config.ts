@@ -1,4 +1,5 @@
 import { vercelPostgresAdapter } from '@payloadcms/db-vercel-postgres'
+import { resendAdapter } from '@payloadcms/email-resend'
 
 import sharp from 'sharp'
 import path from 'path'
@@ -40,6 +41,11 @@ if (!dbConnectionString) {
 }
 
 export default buildConfig({
+  email: resendAdapter({
+    defaultFromAddress: 'info@paradigm-clubs.com', // must be on a verified domain
+    defaultFromName: 'Paradigm',
+    apiKey: process.env.RESEND_API_KEY || '',
+  }),
   admin: {
     components: {
       // The `BeforeLogin` component renders a message that you see while logging into your admin panel.
