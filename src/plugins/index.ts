@@ -9,6 +9,8 @@ import { GenerateTitle, GenerateURL } from '@payloadcms/plugin-seo/types'
 import { FixedToolbarFeature, HeadingFeature, lexicalEditor } from '@payloadcms/richtext-lexical'
 import { searchFields } from '@/search/fieldOverrides'
 import { beforeSyncWithSearch } from '@/search/beforeSync'
+import { vercelBlobStorage } from '@payloadcms/storage-vercel-blob'
+import { syncToMailchimp } from '@/hooks/syncToMailchimp'
 
 import { Page, Post } from '@/payload-types'
 
@@ -58,29 +60,46 @@ export const plugins: Plugin[] = [
     generateTitle,
     generateURL,
   }),
+  vercelBlobStorage({
+    enabled: true,
+    collections: { media: true },
+    token: process.env.BLOB_READ_WRITE_TOKEN,
+    clientUploads: true, // required to upload files >4.5MB on Vercel
+  }),
   formBuilderPlugin({
     fields: {
+      text: true,
+      email: true,
+      number: true,
+      textarea: true,
+      checkbox: true,
+      select: true,
+      message: true,
       payment: false,
     },
+
+    // 1. Adds the per-form opt-in checkbox in the CMS
     formOverrides: {
-      fields: ({ defaultFields }) => {
-        return defaultFields.map((field) => {
-          if ('name' in field && field.name === 'confirmationMessage') {
-            return {
-              ...field,
-              editor: lexicalEditor({
-                features: ({ rootFeatures }) => {
-                  return [
-                    ...rootFeatures,
-                    FixedToolbarFeature(),
-                    HeadingFeature({ enabledHeadingSizes: ['h1', 'h2', 'h3', 'h4'] }),
-                  ]
-                },
-              }),
-            }
-          }
-          return field
-        })
+      fields: ({ defaultFields }) => [
+        ...defaultFields,
+        {
+          name: 'enableMailchimp',
+          type: 'checkbox',
+          label: 'Sync submissions to Mailchimp',
+          defaultValue: false,
+          admin: {
+            description:
+              'When on, people who submit this form are added to your Mailchimp audience.',
+            position: 'sidebar',
+          },
+        },
+      ],
+    },
+
+    // 2. Runs the sync hook on every submission (it self-gates on the checkbox)
+    formSubmissionOverrides: {
+      hooks: {
+        afterChange: [syncToMailchimp],
       },
     },
   }),

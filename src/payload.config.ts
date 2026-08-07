@@ -1,11 +1,9 @@
 import { vercelPostgresAdapter } from '@payloadcms/db-vercel-postgres'
-import { vercelBlobStorage } from '@payloadcms/storage-vercel-blob'
+
 import sharp from 'sharp'
 import path from 'path'
 import { buildConfig, PayloadRequest } from 'payload'
 import { fileURLToPath } from 'url'
-import { formBuilderPlugin } from '@payloadcms/plugin-form-builder'
-import { syncToMailchimp } from '@/hooks/syncToMailchimp'
 
 import { Categories } from './collections/Categories'
 import { Media } from './collections/Media'
@@ -100,52 +98,7 @@ export default buildConfig({
       'http://localhost:3000',
   ].filter(Boolean),
   globals: [Header, Footer],
-  plugins: [
-    vercelBlobStorage({
-      enabled: true,
-      collections: { media: true },
-      token: process.env.BLOB_READ_WRITE_TOKEN,
-      clientUploads: true, // required to upload files >4.5MB on Vercel
-    }),
-    formBuilderPlugin({
-      fields: {
-        text: true,
-        email: true,
-        number: true,
-        textarea: true,
-        checkbox: true,
-        select: true,
-        message: true,
-        payment: false,
-      },
-
-      // 1. Adds the per-form opt-in checkbox in the CMS
-      formOverrides: {
-        fields: ({ defaultFields }) => [
-          ...defaultFields,
-          {
-            name: 'enableMailchimp',
-            type: 'checkbox',
-            label: 'Sync submissions to Mailchimp',
-            defaultValue: false,
-            admin: {
-              description:
-                'When on, people who submit this form are added to your Mailchimp audience.',
-              position: 'sidebar',
-            },
-          },
-        ],
-      },
-
-      // 2. Runs the sync hook on every submission (it self-gates on the checkbox)
-      formSubmissionOverrides: {
-        hooks: {
-          afterChange: [syncToMailchimp],
-        },
-      },
-    }),
-    ...plugins,
-  ],
+  plugins: [...plugins],
   secret: payloadSecret,
   sharp,
   typescript: {

@@ -1,4 +1,5 @@
 import crypto from 'crypto'
+// @ts-expect-error - no types published for this package
 import mailchimp from '@mailchimp/mailchimp_marketing'
 
 mailchimp.setConfig({
