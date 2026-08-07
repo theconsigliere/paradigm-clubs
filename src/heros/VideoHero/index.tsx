@@ -29,11 +29,12 @@ export const VideoHero: React.FC<VideoHeroProps> = ({
   inspoTextRight,
   mainFocusLogo,
 }) => {
+  console.log('VideoHero backgroundMedia:', backgroundMedia)
+
   const backgroundIsVideo = backgroundMedia ? isVideoResource(backgroundMedia) : false
   const backgroundVideoUrl =
     backgroundMedia && isPopulatedMedia(backgroundMedia) ? backgroundMedia.url : undefined
 
-  console.log('VideoHero backgroundMedia:', backgroundMedia)
   console.log('VideoHero backgroundIsVideo:', backgroundIsVideo)
   console.log('VideoHero backgroundVideoUrl:', backgroundVideoUrl)
 
