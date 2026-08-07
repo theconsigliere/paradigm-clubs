@@ -12,15 +12,16 @@ import { Width } from '../Width'
 
 export const Checkbox: React.FC<
   CheckboxField & {
+    className?: string
     errors: Partial<FieldErrorsImpl>
     register: UseFormRegister<FieldValues>
   }
-> = ({ name, defaultValue, errors, label, register, required, width }) => {
+> = ({ className, name, defaultValue, errors, label, register, required, width }) => {
   const props = register(name, { required: required })
   const { setValue } = useFormContext()
 
   return (
-    <Width width={width}>
+    <Width className={className} width={width}>
       <div className="flex items-center gap-2">
         <CheckboxUi
           defaultChecked={defaultValue}

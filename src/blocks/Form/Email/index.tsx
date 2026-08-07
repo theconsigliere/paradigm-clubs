@@ -10,12 +10,13 @@ import { Width } from '../Width'
 
 export const Email: React.FC<
   EmailField & {
+    className?: string
     errors: Partial<FieldErrorsImpl>
     register: UseFormRegister<FieldValues>
   }
-> = ({ name, defaultValue, errors, label, register, required, width }) => {
+> = ({ className, name, defaultValue, errors, label, register, required, width }) => {
   return (
-    <Width width={width}>
+    <Width className={className} width={width}>
       <Label htmlFor={name}>
         {label}
 

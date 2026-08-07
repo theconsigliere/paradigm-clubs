@@ -4,9 +4,14 @@ import React from 'react'
 import { Width } from '../Width'
 import { DefaultTypedEditorState } from '@payloadcms/richtext-lexical'
 
-export const Message: React.FC<{ message: DefaultTypedEditorState }> = ({ message }) => {
+export const Message: React.FC<{ className?: string; message: DefaultTypedEditorState }> = ({
+  className,
+  message,
+}) => {
+  const resolvedClassName = ['my-12', className].filter(Boolean).join(' ')
+
   return (
-    <Width className="my-12" width="100">
+    <Width className={resolvedClassName} width="100">
       {message && <RichText data={message} />}
     </Width>
   )

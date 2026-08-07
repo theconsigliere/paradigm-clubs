@@ -10,13 +10,14 @@ import { Width } from '../Width'
 
 export const Textarea: React.FC<
   TextField & {
+    className?: string
     errors: Partial<FieldErrorsImpl>
     register: UseFormRegister<FieldValues>
     rows?: number
   }
-> = ({ name, defaultValue, errors, label, register, required, rows = 3, width }) => {
+> = ({ className, name, defaultValue, errors, label, register, required, rows = 3, width }) => {
   return (
-    <Width width={width}>
+    <Width className={className} width={width}>
       <Label htmlFor={name}>
         {label}
 

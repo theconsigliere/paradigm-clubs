@@ -778,18 +778,18 @@
     width: 100%;
 }
 
-.formBlock__fields {
+.formBlock__form .formBlock__fields {
 display: flex;
 gap: 1rem;
 }
 
-.formBlock__fields > .formBlock__field {
+.formBlock__form .formBlock__fields > .formBlock__field {
 flex: 1;
 max-width: none !important;
 min-width: 0;
 }
 
-.formBlock__fields > .formBlock__field > .formBlock__field {
+.formBlock__form .formBlock__fields > .formBlock__field > .formBlock__field {
 max-width: none !important;
 }
 

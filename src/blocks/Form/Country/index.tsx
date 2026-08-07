@@ -18,12 +18,13 @@ import { countryOptions } from './options'
 
 export const Country: React.FC<
   CountryField & {
+    className?: string
     control: Control
     errors: Partial<FieldErrorsImpl>
   }
-> = ({ name, control, errors, label, required, width }) => {
+> = ({ className, name, control, errors, label, required, width }) => {
   return (
-    <Width width={width}>
+    <Width className={className} width={width}>
       <Label className="" htmlFor={name}>
         {label}
 

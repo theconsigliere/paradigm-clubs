@@ -18,12 +18,13 @@ import { stateOptions } from './options'
 
 export const State: React.FC<
   StateField & {
+    className?: string
     control: Control
     errors: Partial<FieldErrorsImpl>
   }
-> = ({ name, control, errors, label, required, width }) => {
+> = ({ className, name, control, errors, label, required, width }) => {
   return (
-    <Width width={width}>
+    <Width className={className} width={width}>
       <Label htmlFor={name}>
         {label}
         {required && (
