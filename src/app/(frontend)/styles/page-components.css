@@ -1,7 +1,7 @@
 /* Hero Video */
 
 .videoHero {
-    height: 100dvh;
+    height: 80dvh;
     overflow: hidden;
     position: relative;
     display: flex;
@@ -9,6 +9,10 @@
     align-items: center;
     flex-direction: row;
     background-color: var(--p-black);
+
+    @media (min-width: 768px) {
+         height: 100dvh;
+    }
 
     @media (min-width: 992px ) {
         align-items: center;
@@ -91,9 +95,13 @@
 }
 
 .videoHero__logo-group {
-    width: min(100%, 10.75rem);
+    width: min(100%, 5.75rem);
     height: fit-content;
     margin-bottom: 2.75rem;
+
+    @media (min-width: 768px ) {
+     width: min(100%, 10.75rem);
+    }
 }
 
 
@@ -551,6 +559,10 @@
     @media (min-width: 992px ) {
         margin: 15rem 0 10rem;
     }
+
+    @media (min-width: 1440px ) {
+        margin: 20rem 0 10rem;
+    }
 }
 
 
@@ -609,6 +621,10 @@
     color: var(--p-white);
     font-weight: 200;
     font-size: 12.5dvw;
+
+    @media (min-width: 1200px ) {
+        font-size: 10.5dvw;
+    }
 }
 
 .textFeatureBlock__title-outer--0 {
@@ -972,6 +988,12 @@
 
     .payload-richtext {
         text-align: center;
+        max-width: 100%;
+        text-wrap: balance;
+
+        @media (min-width: 992px ) {
+           max-width: 80%;
+        }
     }
 }
 
@@ -1156,6 +1178,7 @@
         content: '+';
         font-size: 2.25rem;
         position: absolute;
+        top: 0;
         right: 0;
         line-height: 1;
         transition: transform 0.2s ease;
@@ -1177,6 +1200,11 @@
 
 .faqBlock__answer {
     margin-top: 1rem;
+
+    .payload-richtext {
+        text-wrap: balance;
+        max-width: 90%;
+    }
 }
 
 .faqBlock__item::details-content {

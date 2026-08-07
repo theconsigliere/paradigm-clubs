@@ -192,7 +192,11 @@ section {
     align-items: center;
     justify-content: space-between;
     gap: 1rem;
-    padding-block: 2rem;
+    padding-block: 1rem;
+
+    @media (min-width: 768px ) {
+        padding-block: 2rem;
+    }
 }
 
 .pd__header-brand {
