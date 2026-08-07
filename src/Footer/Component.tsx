@@ -14,7 +14,7 @@ export async function Footer() {
 
   return (
     <footer className="pd__footer">
-      <div className="pd__footer-inner pd__container">
+      <div className="pd__footer-inner pd__mega-container">
         <div className="pd__footer-top-section">
           <div className="pd__footer-top-section--left">
             {getInTouch?.subHeadline && (

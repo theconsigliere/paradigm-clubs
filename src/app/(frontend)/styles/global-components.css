@@ -9,6 +9,11 @@
     }
 }
 
+.pd__mega-container {
+    width: 95%;
+    margin: 0 auto;
+}
+
 section {
     background-color: var(--p-white);
 }
@@ -176,7 +181,6 @@ section {
     justify-content: space-between;
     gap: 1rem;
     padding-block: 2rem;
-    margin: 0 2.5%;
 }
 
 .pd__header-brand {
