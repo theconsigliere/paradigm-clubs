@@ -779,18 +779,14 @@
 }
 
 .formBlock__form .formBlock__fields {
-display: flex;
-gap: 1rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
 }
 
 .formBlock__form .formBlock__fields > .formBlock__field {
-flex: 1;
-max-width: none !important;
-min-width: 0;
-}
-
-.formBlock__form .formBlock__fields > .formBlock__field > .formBlock__field {
-max-width: none !important;
+    flex: 1 1 0;
+    min-width: 0;
 }
 
 
@@ -804,8 +800,6 @@ max-width: none !important;
 }
 
 .formBlock__fields {
-    display: grid;
-    gap: 1.5rem;
     margin-bottom: 1.5rem;
 }
 
