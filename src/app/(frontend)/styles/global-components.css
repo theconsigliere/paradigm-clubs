@@ -14,6 +14,10 @@
     margin: 0 auto;
 }
 
+[data-theme="dark"] section {
+    background: var(--p-black);
+}
+
 section {
     background-color: var(--p-white);
 }
@@ -102,6 +106,14 @@ section {
 
 }
 
+
+[data-theme="dark"] .btn--outline:not(.btn--outline--white) {
+    border-color: var(--p-white);
+
+    .btn__label {
+        color: var(--p-white);
+    }
+}
 
 .btn--outline {
     border: 1px solid var(--p-grey);
