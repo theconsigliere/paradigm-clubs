@@ -547,6 +547,7 @@ export interface ContactSectionBlock {
  * via the `definition` "forms".
  */
 export interface Form {
+  enableMailchimp: any;
   id: number;
   title: string;
   fields?:
