@@ -28,6 +28,7 @@
   },
   "dependencies": {
     "@gsap/react": "^2.1.2",
+    "@mailchimp/mailchimp_marketing": "^3.0.80",
     "@payloadcms/admin-bar": "3.86.0",
     "@payloadcms/db-vercel-postgres": "3.86.0",
     "@payloadcms/live-preview-react": "3.86.0",
