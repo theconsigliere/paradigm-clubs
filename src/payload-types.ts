@@ -547,7 +547,6 @@ export interface ContactSectionBlock {
  * via the `definition` "forms".
  */
 export interface Form {
-  enableMailchimp: any;
   id: number;
   title: string;
   fields?:
@@ -705,6 +704,10 @@ export interface Form {
         id?: string | null;
       }[]
     | null;
+  /**
+   * When on, people who submit this form are added to your Mailchimp audience.
+   */
+  enableMailchimp?: boolean | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -2140,6 +2143,7 @@ export interface FormsSelect<T extends boolean = true> {
         message?: T;
         id?: T;
       };
+  enableMailchimp?: T;
   updatedAt?: T;
   createdAt?: T;
 }

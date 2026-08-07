@@ -11383,6 +11383,13 @@
           "primaryKey": false,
           "notNull": false
         },
+        "enable_mailchimp": {
+          "name": "enable_mailchimp",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false,
+          "default": false
+        },
         "updated_at": {
           "name": "updated_at",
           "type": "timestamp(3) with time zone",
@@ -14849,6 +14856,6 @@
     "tables": {},
     "columns": {}
   },
-  "id": "c2bc4b9f-3216-4225-b791-d9730745dfd2",
+  "id": "b5bb64d6-ec7c-4e72-8f66-a1ed450ba346",
   "prevId": "00000000-0000-0000-0000-000000000000"
 }
