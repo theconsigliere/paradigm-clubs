@@ -64,7 +64,10 @@ export const plugins: Plugin[] = [
     enabled: true,
     collections: { media: true },
     token: process.env.BLOB_READ_WRITE_TOKEN,
-    clientUploads: true, // required to upload files >4.5MB on Vercel
+    // true in production, false locally.
+    // Locally avoids the read-after-write race in the client-upload flow;
+    // in production keeps uploads off the 4.5MB serverless body limit.
+    clientUploads: process.env.NODE_ENV === 'production',
   }),
   formBuilderPlugin({
     fields: {
